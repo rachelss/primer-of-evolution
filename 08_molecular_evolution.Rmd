@@ -240,32 +240,6 @@ Where do these radically different antigenic sites come from? Humans are not the
 
 The exercise associated with this chapter will primarily focus on visualizing phylogenetic trees and associated metadata and interpreting data from molecular evolution analyses. To do so, you will use some new R functions from packages you have not previously used. Note that you will not have to write the more complex code associated with this exercise from scratch; some information in this section just provides additional context if you want to dig deeper.
 
-### Installing Dependencies
-
-To work through this week's exercise, you will need to install four new R packages. Three of these packages (`ape`, `dplyr`, `phytools`, and `tidyr`) are available through [CRAN](https://cran.r-project.org/) (the network providing R) and can be installed the same way as previous packages (*i.e.*, use the `install.packages()` function or click Tools\>Install Packages...).
-
-``` ruby
-install.packages("ape")
-install.packages("dplyr")
-install.packages("phytools")
-install.packages("tidyr")
-```
-
-The fourth package (`ggtree`) is not available from CRAN and needs to be retrieved from a different repository, called [Bioconductor](https://bioconductor.org/). Bioconductor is specialized in providing tools for the analysis of a wide variety of high-throughput biological data (including phylogenetics, genomics, and transcriptomics). To install packages from Bioconductor, you first need to install an auxiliary package (`BiocManager`). Once installed, Bioconductor packages can be installed using the `BiocManager::install()` function. So, to install `ggtree`, you will have to execute the following code.
-
-``` ruby
-install.packages("BiocManager")
-BiocManager::install("ggtree")
-```
-
-After installation, make sure to either delete the installation code or silence the code with hashtags to avoid problems with knitting the document to an \*.html file.
-
-::: {.alert .alert-block .alert-warning}
-![](images/important.png){width="20"} **Important Note**
-
-If you are having trouble installing `ggtree`, please make sure that your computer fulfills the system requirements. Some Bioconductor packages are notorious for not playing well with Google Chromebooks, outdated versions of Mac OS, and some antivirus programs on PCs.
-:::
-
 ### The Pipe Operator
 
 In this exercise, you will see the use of the so-called pipe operator, `%>%`, which is part of the `dplyr` package. The pipe operator is used to pass the results of the function on the left hand side as an argument to the function on the right hand side. It allows us to skip the definition of intermediate variables and chain together multiple functions in a series. The pipe operator is widely used to simplify code, both in terms of readability and execution.

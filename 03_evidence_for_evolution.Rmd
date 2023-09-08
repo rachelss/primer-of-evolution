@@ -265,11 +265,11 @@ The fact that we do not know the answers to these questions, and many others lik
 
 ## Case Study: Darwin's Finches
 
-For the [first case study](exercises/BIOL520-ex1.zip), we will take a closer look at some evidence for microevolution, using one of the most iconic study systems in evolutionary biology, the Darwin's finches on the Galapagos Islands. These are the same finches that helped to inspire Darwin, but much of what we know about these finches comes from two biologists, Rosemary and Peter Grant, who have studied these birds in their natural habitats for many decades.
+For the first case study, we will take a closer look at some evidence for microevolution, using one of the most iconic study systems in evolutionary biology, the Darwin's finches on the Galapagos Islands. These are the same finches that helped to inspire Darwin, but much of what we know about these finches comes from two biologists, Rosemary and Peter Grant, who have studied these birds in their natural habitats for many decades.
 
 The Grants' primary study site is Daphne Major. With a size of less than half a square kilometer, it is one of the smallest islands in the Galapagos Archipelago (Figure \@ref(fig:daphne)). Daphne Major harbors a significant population of the medium ground finch (*Geospiza fortis*, Figure \@ref(fig:fortis)), which was the focus of much of the Grants' research. Over decades, they followed this finch population, not only keeping track of individual birds and their offspring, but meticulously measuring the population's phenotypic traits generation after generation. This resulted in a massive, long-term data set that allows us to ask key questions about microevolutionary change. For this exercise, we will take a look at the beak size data the Grants collected from 1972-1994.
 
-Note that this week's case study also provides a general introduction to RStudio and RNotebooks. The practical skills required to complete the exercise are also explained in the section below.
+Note that this week's case study also provides a general introduction to RStudio. The practical skills required to complete the exercise are also explained in the section below.
 
 ::: {.alert .alert-block .alert-info}
 <b>Explore More</b>
@@ -285,9 +285,9 @@ knitr::include_graphics('images/daphne_major.jpg')
 knitr::include_graphics('images/Geospiza_fortis.jpg')
 ```
 
-## Practical Skills: R Notebooks and Plotting with ggplot
+## Practical Skills: Plotting with ggplot
 
-### R Notebooks
+### R Basics
 
 In the [last chapter](what-evolution-is.html#r), you learned how to enter commands in the RStudio console to receive an output from R. This showed you the general principle of how you can prompt R to execute any function you want.
 
@@ -377,6 +377,8 @@ ggplot(test_data, aes(x=length, y=mass)) +
 
 Note that an alternative way of changing the axes labels is to use the `labs()` function. Specifically, `labs(x="Body length in cm", y="Body mass in kg")` will provide the same result as the code used above.
 
+While there appears to be a relationship between length and mass, we cannot say this for sure without using statistics.
+
 #### Adding Additional Complexity {.unnumbered}
 
 If you look at the data frame, you will see that we do not only have information about the length and mass of individuals in the population, but also their sex. So, we may want to account for potential sex differences in the relationship between length and mass. To do so, we can color-code individual points based on the sex of the individual by adding another term of the aesthetics of the `ggplot()` function (`color=sex`):
@@ -450,6 +452,7 @@ The null hypothesis is that the two means are equal, and the alternative is that
 
 The t.test function takes two "arguments" - one vector of each category of data.
 To get our first vector we need to `filter` our original test dataset for females (i.e. cases where we observe the value 'female' in the `sex` column).
+Because we only have the mean values in the summary dataset we cannot use this dataset to determine if the means are different as we need information about sample size and variation across samples.
 
 ```{r filter}
 female_test_data <- filter(test_data, sex == 'female')
@@ -461,13 +464,78 @@ Now you should be able to repeat this to get `male_test_data`.
 male_test_data <- filter(test_data, sex == 'male')
 ```
 
-Now we can compare the `sex` columns of these two datasets.
+Now we can compare the `length` columns of these two datasets.
 
 ```{r t}
 t.test(female_test_data$length, male_test_data$length)
 ```
 
 What do you conclude about whether males and females differ?
+
+## Case study: Darwin's Finches
+
+One of the most iconic study systems in evolutionary biology are Darwin's finches on the Galapagos Islands. Rosemary and Peter Grant spent much of their lives devoted to the study of these bird, examining how their traits change in response to major ecological perturbations. To do so, they collected a massive, long-term data set on different traits of the medium ground finch (*Geospiza fortis*) population on Daphne Major Island. For this exercise, we will take a look at their beak size data from 1972-1994.
+
+![](finch.jpg)
+
+### Import data
+
+The beak size data can be found in file called "finches.csv" located at 'https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/exercises/finches.csv'. The file includes three variables: year, the average relative beak size (rel.beak.size), and the standard error (st.err) that describes the variability of beak size in any given year. Given the work you have done previously, you should be able to read this file into a variable in your Environment.
+
+```{r, echo = FALSE}
+finch <- read_csv("data/exercises/finches.csv")
+```
+
+
+### Plotting the Data
+
+Given the work you have done previously, you should be able to 
+make a scatter (point) plot of your data relating the
+year and the average relative beak size.
+
+```{r, include = FALSE, echo = FALSE}
+ggplot(finch, aes(x=year, y=rel.beak.size)) +
+  geom_point() +
+  xlab("Year") +
+  ylab("Beak Size")
+```
+
+### Adding Additional Graphical Elements
+
+There are two graphical elements that we can add to facilitate the interpretation of the data:
+
+1.  Because this is a time series, it makes sense to connect the dots representing the means from year to year. You can do this by simply adding another geom: `geom_line()`.
+2.  We want to know how much the average beak size changes relative to the variability in the population. If variability is high, year to year variation in may be negligible. But if variability is low, changes across year may actually be substantial. Add `geom_errorbar()` as in your prior work to show the variability.
+
+```{r, include = FALSE, echo = FALSE}
+ggplot(finch, aes(x=year, y=rel.beak.size)) +
+  geom_point() +
+  geom_line() +
+  geom_errorbar(aes(ymin=rel.beak.size-st.err, ymax=rel.beak.size+st.err))  +
+  xlab("Year") +
+  ylab("Beak Size")
+```
+
+### Interpretation
+
+#### General patterns
+
+Based on the graphs you just made, what do you observe? How do you interpret the data if I told you that 1977 was a massive drought year?
+
+
+#### Evolution... or Not?
+
+Do you think these data reflect evolutionary change through time? What is a potential alternative explanation? What additional information would you need to either accept or reject the hypothesis that these patterns reflect evolutionary change?
+
+### Data References
+
+Data on beak size variation in Darwin's finches came from the following publication:
+
+-   Grant, PR & BR Grant. 2002. [Unpredictable evolution in a 30-year study of Darwin's finches](https://science.sciencemag.org/content/296/5568/707). *Science* 296, 707-711.
+
+
+Consulting additional resources to solve this assignment is absolutely allowed, but failure to disclose those resources is plagiarism. Please list any collaborators you worked with and resources you used below or state that you have not used any.
+
 
 ## Reflection Questions
 
