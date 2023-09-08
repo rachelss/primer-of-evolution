@@ -942,6 +942,29 @@ Figure 2.15: Medium Ground Finch (<em>Geospiza fortis</em>), Santa Cruz, Galapag
 <p>To make use of installed libraries, you also need to load the libraries <em>every time</em> you use R (<em>i.e.</em>, every time you restart the program). You can do this with the <code>library()</code> command, and you will find a code chunk prompting you to load all required libraries at the beginning of each R Notebook. For example, the following code chunk loads the <code>tidyverse</code> library:</p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="evidence-for-evolution.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Note that loading a library does not lead to an output</span></span>
 <span id="cb36-2"><a href="evidence-for-evolution.html#cb36-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code></pre></div>
+<pre><code>## ── Attaching core tidyverse packages ────────────────────────────────────────────────────────────────── tidyverse 2.0.0 ──
+## ✔ dplyr     1.1.3     ✔ readr     2.1.4
+## ✔ forcats   1.0.0     ✔ stringr   1.5.0
+## ✔ ggplot2   3.4.3     ✔ tibble    3.2.1
+## ✔ lubridate 1.9.2     ✔ tidyr     1.3.0
+## ✔ purrr     1.0.2     
+## ── Conflicts ──────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ lubridate::%within%() masks IRanges::%within%()
+## ✖ dplyr::collapse()     masks Biostrings::collapse(), IRanges::collapse()
+## ✖ dplyr::combine()      masks BiocGenerics::combine()
+## ✖ purrr::compact()      masks XVector::compact()
+## ✖ dplyr::desc()         masks IRanges::desc()
+## ✖ tidyr::expand()       masks S4Vectors::expand()
+## ✖ dplyr::filter()       masks stats::filter()
+## ✖ dplyr::first()        masks S4Vectors::first()
+## ✖ dplyr::lag()          masks stats::lag()
+## ✖ ggplot2::Position()   masks BiocGenerics::Position(), base::Position()
+## ✖ purrr::reduce()       masks IRanges::reduce()
+## ✖ dplyr::rename()       masks S4Vectors::rename()
+## ✖ lubridate::second()   masks S4Vectors::second()
+## ✖ lubridate::second&lt;-() masks S4Vectors::second&lt;-()
+## ✖ dplyr::slice()        masks XVector::slice(), IRanges::slice()
+## ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
 <div class="alert alert-block alert-warning">
 <p><img src="images/important.png" width="20" /> <strong>Important Note</strong></p>
 <p>You have to re-load your libraries every time you restart RStudio. The most common error students in this class encounter is that a particular function cannot be found:</p>
@@ -956,8 +979,8 @@ Figure 2.15: Medium Ground Finch (<em>Geospiza fortis</em>), Santa Cruz, Galapag
 <div id="reading-a-.csv-file" class="section level4 unnumbered hasAnchor">
 <h4>Reading a *.csv File<a href="evidence-for-evolution.html#reading-a-.csv-file" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>To import data in the form of *.csv files, you can use R’s <code>read_csv()</code> function. In the code chunk below, you can import a simple test data set <a href="data/test_data.csv">test_data.csv</a> provided with this textbook that includes three variables: sex, length, and mass of individuals in a population.</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="evidence-for-evolution.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The line of code simply prompts the computer to read the &quot;test_data.csv&quot; file and generate a data.frame called test_data</span></span>
-<span id="cb38-2"><a href="evidence-for-evolution.html#cb38-2" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/test_data.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="evidence-for-evolution.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The line of code simply prompts the computer to read the &quot;test_data.csv&quot; file and generate a data.frame called test_data</span></span>
+<span id="cb39-2"><a href="evidence-for-evolution.html#cb39-2" aria-hidden="true" tabindex="-1"></a>test_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&#39;data/test_data.csv&#39;</span>)</span></code></pre></div>
 <pre><code>## Rows: 60 Columns: 3
 ## ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
@@ -975,37 +998,37 @@ Figure 2.15: Medium Ground Finch (<em>Geospiza fortis</em>), Santa Cruz, Galapag
 <div id="defining-the-axes-and-coordinate-system" class="section level4 unnumbered hasAnchor">
 <h4>Defining the Axes and Coordinate System<a href="evidence-for-evolution.html#defining-the-axes-and-coordinate-system" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The first step of making any graph is to define the axes and establish the coordinate grid that allows for the plotting of the data. To do this, R first needs to know what data frame the data is stored in (in our case, the data frame is called <code>test.data</code>). The axes are then defined by specifying the aesthetics <code>aes()</code> within the <code>ggplot</code> function, as shown below.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="evidence-for-evolution.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This line of code calls for the ggplot function (a plotting function) and makes a grid based on the test.data data frame, using length as the x axis and mass as the y axis</span></span>
-<span id="cb40-2"><a href="evidence-for-evolution.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass))</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="evidence-for-evolution.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This line of code calls for the ggplot function (a plotting function) and makes a grid based on the test.data data frame, using length as the x axis and mass as the y axis</span></span>
+<span id="cb41-2"><a href="evidence-for-evolution.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass))</span></code></pre></div>
 <p><img src="Primer-to-Evolution_files/figure-html/coord-1.png" width="672" /></p>
 <p>The output is a simple coordinate system based on the data we provided, with length as the x-axis and mass as the y-axis.</p>
 </div>
 <div id="adding-a-layer-with-data-points" class="section level4 unnumbered hasAnchor">
 <h4>Adding a Layer with Data Points<a href="evidence-for-evolution.html#adding-a-layer-with-data-points" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The second step is to draw the actual data into the established coordinate system. To do so, you just need to tell the program what kind of graph you want to draw. Different graph types in ggplot are referred to as geoms (geometries), and a scatter plot is designated as <code>geom_point()</code>. You can add that to your existing code describing the coordinate system with a plus sign.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="evidence-for-evolution.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass)) <span class="sc">+</span></span>
-<span id="cb41-2"><a href="evidence-for-evolution.html#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="evidence-for-evolution.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass)) <span class="sc">+</span></span>
+<span id="cb42-2"><a href="evidence-for-evolution.html#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code></pre></div>
 <p><img src="Primer-to-Evolution_files/figure-html/points-1.png" width="672" /></p>
 <p>For an overview of some of the graph types (geoms) ggplot offers, check <a href="https://www.r-graph-gallery.com/">here</a>. In the coming chapters, I will introduce you to a variety of geoms that you can use to visualize different types of data.</p>
 </div>
 <div id="adding-a-trendline" class="section level4 unnumbered hasAnchor">
 <h4>Adding a Trendline<a href="evidence-for-evolution.html#adding-a-trendline" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Whenever we look at the relationship between two variables, we may want to add a trendline. You can add a trendline by adding the <code>geom_smooth()</code> function to your existing code. <code>method="lm"</code> within the <code>geom_smooth()</code> function indicates that we want to draw a straight line (linear model, <code>lm</code>). <code>se=FALSE</code> indicates that we do not want to draw a confidence interval around the estimated best-fit line. Change it to <code>se=TRUE</code> and see what happens.</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="evidence-for-evolution.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The code within the brackets of the geom_smooth command specifies some additional options, namely that we want to draw a straight line (method=&quot;lm&quot;) and that we do not want to show the confidence interval (se=FALSE).</span></span>
-<span id="cb42-2"><a href="evidence-for-evolution.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass)) <span class="sc">+</span></span>
-<span id="cb42-3"><a href="evidence-for-evolution.html#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb42-4"><a href="evidence-for-evolution.html#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="evidence-for-evolution.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The code within the brackets of the geom_smooth command specifies some additional options, namely that we want to draw a straight line (method=&quot;lm&quot;) and that we do not want to show the confidence interval (se=FALSE).</span></span>
+<span id="cb43-2"><a href="evidence-for-evolution.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass)) <span class="sc">+</span></span>
+<span id="cb43-3"><a href="evidence-for-evolution.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb43-4"><a href="evidence-for-evolution.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>)</span></code></pre></div>
 <p><img src="Primer-to-Evolution_files/figure-html/trend-1.png" width="672" /></p>
 </div>
 <div id="changing-the-axes-labels" class="section level4 unnumbered hasAnchor">
 <h4>Changing the Axes Labels<a href="evidence-for-evolution.html#changing-the-axes-labels" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The variable names in the data frame do not always provide the clearest description of what a variable means. We can modify the x and y axis labels using the <code>xlab()</code> and <code>ylab()</code> commands, respectively. Note that labels need to be written in quotation marks.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="evidence-for-evolution.html#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Simply add the new label text in quotation marks</span></span>
-<span id="cb43-2"><a href="evidence-for-evolution.html#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass)) <span class="sc">+</span></span>
-<span id="cb43-3"><a href="evidence-for-evolution.html#cb43-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb43-4"><a href="evidence-for-evolution.html#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb43-5"><a href="evidence-for-evolution.html#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Body length in cm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb43-6"><a href="evidence-for-evolution.html#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Body mass in kg&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="evidence-for-evolution.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Simply add the new label text in quotation marks</span></span>
+<span id="cb44-2"><a href="evidence-for-evolution.html#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass)) <span class="sc">+</span></span>
+<span id="cb44-3"><a href="evidence-for-evolution.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb44-4"><a href="evidence-for-evolution.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb44-5"><a href="evidence-for-evolution.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Body length in cm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb44-6"><a href="evidence-for-evolution.html#cb44-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Body mass in kg&quot;</span>)</span></code></pre></div>
 <p><img src="Primer-to-Evolution_files/figure-html/labels-1.png" width="672" /></p>
 <p>Note that an alternative way of changing the axes labels is to use the <code>labs()</code> function. Specifically, <code>labs(x="Body length in cm", y="Body mass in kg")</code> will provide the same result as the code used above.</p>
 <p>While there appears to be a relationship between length and mass, we cannot say this for sure without using statistics.</p>
@@ -1013,11 +1036,11 @@ Figure 2.15: Medium Ground Finch (<em>Geospiza fortis</em>), Santa Cruz, Galapag
 <div id="adding-additional-complexity" class="section level4 unnumbered hasAnchor">
 <h4>Adding Additional Complexity<a href="evidence-for-evolution.html#adding-additional-complexity" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>If you look at the data frame, you will see that we do not only have information about the length and mass of individuals in the population, but also their sex. So, we may want to account for potential sex differences in the relationship between length and mass. To do so, we can color-code individual points based on the sex of the individual by adding another term of the aesthetics of the <code>ggplot()</code> function (<code>color=sex</code>):</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="evidence-for-evolution.html#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
-<span id="cb44-2"><a href="evidence-for-evolution.html#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb44-3"><a href="evidence-for-evolution.html#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb44-4"><a href="evidence-for-evolution.html#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Body length in cm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb44-5"><a href="evidence-for-evolution.html#cb44-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Body mass in kg&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="evidence-for-evolution.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
+<span id="cb45-2"><a href="evidence-for-evolution.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb45-3"><a href="evidence-for-evolution.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb45-4"><a href="evidence-for-evolution.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Body length in cm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb45-5"><a href="evidence-for-evolution.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Body mass in kg&quot;</span>)</span></code></pre></div>
 <p><img src="Primer-to-Evolution_files/figure-html/groups-1.png" width="672" /></p>
 <p>As you can see, this not only changes the color of individual points, but it also draws a separate regression line for males and females. If you want to change the legend title, you can do this again with the <code>labs()</code> function: <code>labs(x="Body length in cm", y="Body mass in kg", color="Sex")</code> .</p>
 </div>
@@ -1025,12 +1048,12 @@ Figure 2.15: Medium Ground Finch (<em>Geospiza fortis</em>), Santa Cruz, Galapag
 <h4>Changing to a Colorblind-Friendly Palette<a href="evidence-for-evolution.html#changing-to-a-colorblind-friendly-palette" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>ggplot uses a default color palette when you add color to a graph. You may not like that default color scheme, or—if you have impaired color perception—you may find it difficult to distinguish some of the default colors. One simple way of changing the color palette of your graph is to add viridis coloration to your plot.</p>
 <p>To change the color scheme of the graph generated with the <code>ggplot()</code>, you can simply use the <code>+ scale_colour_viridis_d()</code> function to designate the desired palette:</p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="evidence-for-evolution.html#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
-<span id="cb45-2"><a href="evidence-for-evolution.html#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb45-3"><a href="evidence-for-evolution.html#cb45-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb45-4"><a href="evidence-for-evolution.html#cb45-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Body length in cm&quot;</span>) <span class="sc">+</span></span>
-<span id="cb45-5"><a href="evidence-for-evolution.html#cb45-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Body mass in kg&quot;</span>) <span class="sc">+</span></span>
-<span id="cb45-6"><a href="evidence-for-evolution.html#cb45-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="evidence-for-evolution.html#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(test_data, <span class="fu">aes</span>(<span class="at">x=</span>length, <span class="at">y=</span>mass, <span class="at">color=</span>sex)) <span class="sc">+</span></span>
+<span id="cb46-2"><a href="evidence-for-evolution.html#cb46-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb46-3"><a href="evidence-for-evolution.html#cb46-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method=</span><span class="st">&quot;lm&quot;</span>, <span class="at">se=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb46-4"><a href="evidence-for-evolution.html#cb46-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Body length in cm&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-5"><a href="evidence-for-evolution.html#cb46-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Body mass in kg&quot;</span>) <span class="sc">+</span></span>
+<span id="cb46-6"><a href="evidence-for-evolution.html#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_colour_viridis_d</span>()</span></code></pre></div>
 <p><img src="Primer-to-Evolution_files/figure-html/coltheme-1.png" width="672" /></p>
 <p>Note the <code>d</code> at the end of the function stands for discrete as you have two discrete categories of data.</p>
 </div>
@@ -1038,18 +1061,18 @@ Figure 2.15: Medium Ground Finch (<em>Geospiza fortis</em>), Santa Cruz, Galapag
 <h4>Generating and Visualizing Aggregate Data<a href="evidence-for-evolution.html#generating-and-visualizing-aggregate-data" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In the exercise associated with this chapter, you will not be plotting data from individuals but rather aggregate data that is compiled from many individuals and provides a mean and a measurement of variation around a mean for different sampling groups. To show you how we can visualize such data as mean (± variation), we need to first calculate the mean and standard deviation (sd) of length separate for each sex based on the data above.</p>
 <p>To do this, we will use the <code>group_by</code> and <code>summarize</code> functions to create a new variable where each subset of data is labeled. First, tell <code>group_by</code> the name of the data you want to divide into subsets, followed by the columns you want to include.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="evidence-for-evolution.html#cb46-1" aria-hidden="true" tabindex="-1"></a>grouped_test_data <span class="ot">&lt;-</span> <span class="fu">group_by</span>(test_data, sex)</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="evidence-for-evolution.html#cb47-1" aria-hidden="true" tabindex="-1"></a>grouped_test_data <span class="ot">&lt;-</span> <span class="fu">group_by</span>(test_data, sex)</span></code></pre></div>
 <p>Next we calculate the mean and sd for each group, and put this into a new variable.
 The name of the column containing the mean (calculated using the function <code>mean</code>) is “mean”.
 The name of the column containing the sd (calculated using the function <code>sd</code>) is “sd”.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="evidence-for-evolution.html#cb47-1" aria-hidden="true" tabindex="-1"></a>summary_test_data <span class="ot">&lt;-</span> <span class="fu">summarise</span>(grouped_test_data,<span class="at">mean=</span><span class="fu">mean</span>(length),<span class="at">sd=</span><span class="fu">sd</span>(length))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="evidence-for-evolution.html#cb48-1" aria-hidden="true" tabindex="-1"></a>summary_test_data <span class="ot">&lt;-</span> <span class="fu">summarise</span>(grouped_test_data,<span class="at">mean=</span><span class="fu">mean</span>(length),<span class="at">sd=</span><span class="fu">sd</span>(length))</span></code></pre></div>
 <p>Click on the variable in your Environment to view your new summary table.</p>
 <p>To visualize means and standard deviations, we can again use the <code>ggplot()</code> function with sex on the x axis and the mean value of length on the y axis (note that we are now referring to the <code>summary_test_data</code> data frame that we just created). As before, we are using <code>geom_point()</code> to draw our data as points. In addition, we are using <code>geom_errorbar()</code> to draw the standard deviations around the mean in both directions. You already know all the other code elements from above.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="evidence-for-evolution.html#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_test_data, <span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y=</span>mean)) <span class="sc">+</span></span>
-<span id="cb48-2"><a href="evidence-for-evolution.html#cb48-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb48-3"><a href="evidence-for-evolution.html#cb48-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd, <span class="at">ymax=</span>mean<span class="sc">+</span>sd), <span class="at">width=</span><span class="fl">0.1</span>)  <span class="sc">+</span>  <span class="co">#width designates the width of the horizontal bars</span></span>
-<span id="cb48-4"><a href="evidence-for-evolution.html#cb48-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sex&quot;</span>) <span class="sc">+</span></span>
-<span id="cb48-5"><a href="evidence-for-evolution.html#cb48-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Mean length [mm]&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="evidence-for-evolution.html#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(summary_test_data, <span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y=</span>mean)) <span class="sc">+</span></span>
+<span id="cb49-2"><a href="evidence-for-evolution.html#cb49-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb49-3"><a href="evidence-for-evolution.html#cb49-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd, <span class="at">ymax=</span>mean<span class="sc">+</span>sd), <span class="at">width=</span><span class="fl">0.1</span>)  <span class="sc">+</span>  <span class="co">#width designates the width of the horizontal bars</span></span>
+<span id="cb49-4"><a href="evidence-for-evolution.html#cb49-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sex&quot;</span>) <span class="sc">+</span></span>
+<span id="cb49-5"><a href="evidence-for-evolution.html#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Mean length [mm]&quot;</span>)</span></code></pre></div>
 <p><img src="Primer-to-Evolution_files/figure-html/meanplot-1.png" width="672" /></p>
 <p>You can’t say whether the mean values for male and female length are different from the graph alone.
 Obviously, the mean values are not equal, but whether they are significantly different depends on the variation in the samples as well as the number of samples.
@@ -1060,10 +1083,10 @@ The null hypothesis is that the two means are equal, and the alternative is that
 <p>The t.test function takes two “arguments” - one vector of each category of data.
 To get our first vector we need to <code>filter</code> our original test dataset for females (i.e. cases where we observe the value ‘female’ in the <code>sex</code> column).
 Because we only have the mean values in the summary dataset we cannot use this dataset to determine if the means are different as we need information about sample size and variation across samples.</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="evidence-for-evolution.html#cb49-1" aria-hidden="true" tabindex="-1"></a>female_test_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(test_data, sex <span class="sc">==</span> <span class="st">&#39;female&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="evidence-for-evolution.html#cb50-1" aria-hidden="true" tabindex="-1"></a>female_test_data <span class="ot">&lt;-</span> <span class="fu">filter</span>(test_data, sex <span class="sc">==</span> <span class="st">&#39;female&#39;</span>)</span></code></pre></div>
 <p>Now you should be able to repeat this to get <code>male_test_data</code>.</p>
 <p>Now we can compare the <code>length</code> columns of these two datasets.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="evidence-for-evolution.html#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(female_test_data<span class="sc">$</span>length, male_test_data<span class="sc">$</span>length)</span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="evidence-for-evolution.html#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t.test</span>(female_test_data<span class="sc">$</span>length, male_test_data<span class="sc">$</span>length)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -1082,17 +1105,10 @@ Because we only have the mean values in the summary dataset we cannot use this d
 <div id="case-study-darwins-finches-1" class="section level2 hasAnchor" number="2.10">
 <h2><span class="header-section-number">2.10</span> Case study: Darwin’s Finches<a href="evidence-for-evolution.html#case-study-darwins-finches-1" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>One of the most iconic study systems in evolutionary biology are Darwin’s finches on the Galapagos Islands. Rosemary and Peter Grant spent much of their lives devoted to the study of these bird, examining how their traits change in response to major ecological perturbations. To do so, they collected a massive, long-term data set on different traits of the medium ground finch (<em>Geospiza fortis</em>) population on Daphne Major Island. For this exercise, we will take a look at their beak size data from 1972-1994.</p>
-<p><img src="finch.jpg" /></p>
+<p><img src="https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/finch.jpg" /></p>
 <div id="import-data-1" class="section level3 hasAnchor" number="2.10.1">
 <h3><span class="header-section-number">2.10.1</span> Import data<a href="evidence-for-evolution.html#import-data-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The beak size data can be found in file called “finches.csv” located at ‘<a href="https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/exercises/finches.csv" class="uri">https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/exercises/finches.csv</a>’. The file includes three variables: year, the average relative beak size (rel.beak.size), and the standard error (st.err) that describes the variability of beak size in any given year. Given the work you have done previously, you should be able to read this file into a variable in your Environment.</p>
-<pre><code>## Rows: 22 Columns: 3
-## ── Column specification ──────────────────────────────────────────────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## dbl (3): year, rel.beak.size, st.err
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div id="plotting-the-data" class="section level3 hasAnchor" number="2.10.2">
 <h3><span class="header-section-number">2.10.2</span> Plotting the Data<a href="evidence-for-evolution.html#plotting-the-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>

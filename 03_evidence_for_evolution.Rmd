@@ -476,13 +476,13 @@ What do you conclude about whether males and females differ?
 
 One of the most iconic study systems in evolutionary biology are Darwin's finches on the Galapagos Islands. Rosemary and Peter Grant spent much of their lives devoted to the study of these bird, examining how their traits change in response to major ecological perturbations. To do so, they collected a massive, long-term data set on different traits of the medium ground finch (*Geospiza fortis*) population on Daphne Major Island. For this exercise, we will take a look at their beak size data from 1972-1994.
 
-![](finch.jpg)
+![](https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/finch.jpg)
 
 ### Import data
 
 The beak size data can be found in file called "finches.csv" located at 'https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/exercises/finches.csv'. The file includes three variables: year, the average relative beak size (rel.beak.size), and the standard error (st.err) that describes the variability of beak size in any given year. Given the work you have done previously, you should be able to read this file into a variable in your Environment.
 
-```{r, echo = FALSE}
+```{r, echo = FALSE, warning=FALSE, message=FALSE}
 finch <- read_csv("data/exercises/finches.csv")
 ```
 
