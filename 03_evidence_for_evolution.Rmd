@@ -289,68 +289,15 @@ knitr::include_graphics('images/Geospiza_fortis.jpg')
 
 ### R Notebooks
 
-In the [last chapter](what-evolution-is.html#r), you learned how to enter commands in the RStudio console to receive an output from R. This showed you the general principle of how you can prompt R to execute any function you want. In reality, you will rarely work in the console, at least for this class. This is because RStudio provides the ability to create *R Notebooks* (\*.Rmd files) that allow you to combine text elements (formatted using the Markdown text formatting system) with chunks of code and the code output. Essentially, your R Notebook will contain multiple mini-consoles (the code chunks) with code that you can execute, and the output will be displayed immediately below. The big advantage is that you can create documents that contain computer codes, their outputs (like graphs), and explanatory text (e.g., instructions provided to you or interpretations of the results provided by you).
-
-Each chapter comes with a downloadable \*.zip file that contains a folder with the materials for the accompanying exercises (see [Appendix B](r-exercises.html) or links on Canvas). Once unzipped, the folder contains a pre-formatted \*.Rmd file as well as additional files, like data sets and images. To avoid issues with the import of data and the display of images, it is important to you keep all files together in the same folder as you received them. If you want to move the files (for example from your *Downloads* folder to your *Class* folder), I recommend that you move the entire folder containing the exercise files (rather than the individual files).
-
-Once you downloaded the files associated with the first exercise, you can open the \*.Rmd file by double-clicking, and it will automatically open in RStudio. As you can see, there are three main parts to an R Notebook file.
-
-#### The Header {.unnumbered}
-
-The header, which you can see at the beginning of the document, is delineated with three dashes (`---`) at the beginning and the end. It includes some code that is important for the formatting of output files. This section of the document is pre-formatted, and I would recommend not altering it; there is no reason for you to change the header for any exercises in this course. However, if you would like to learn more about the different header options for your use of R Notebooks in the future, you can find a good tutorial [here](https://bookdown.org/yihui/rmarkdown/html-document.html#table-of-contents).
-
-#### Code Chunks {.unnumbered}
-
-Code chunks are delineated with three ticks (`'''`) at the beginning and the end, and the `{r}` after the first set of ticks lets your computer know that you will be using the R programming language. You can always add a code chunk by clicking "Insert \> Code Chunk \> R" in the RStudio menu, although we usually already created all the chunks that you will need. Any text within a chunk, if written correctly, represents executable code, which R can interpret as a command to execute certain tasks. You can make your computer execute the code in a chunk by pressing the small, green play arrow in the top right corner of each chunk, or you can just highlight the code and press command+enter (control+enter on PC). When you execute the code, the output will automatically appear below the code chunk.
-
-Sometimes you will find us using hash tags (`#`) within code chunks. Hash tags "silence" the code that follows on the same line, such that the computer jumps over that section when executing the code. That is useful for code annotation, and you will frequently see us using the hash tags to add instructions or explanations.
-
-#### Text {.unnumbered}
-
-The text in between code chunks is just that: text. We will use these sections to provide you with background information and discussion prompts, and you will use these sections to respond to questions and offer your interpretations of data. Sections where you need to write something are always highlighted in *italics* (designated with asterisks in the source code). You can use a variety of Markdown prompts to format your text (see [here](https://rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) for a cheat sheet), although the current version of RStudio allows you to change formatting with a click of a button, just like other word processing software.
-
-#### HTML Preview and Output {.unnumbered}
-
-A key strength of the R Notebook system is that you can output your notebook in a wide variety of file formats that automatically integrate text, code, and code output. In fact, this book has entirely been written in RStudio!
-
-To generate an output, your R Notebook (including text, code chunks, and the outputs from your code) can be automatically "knitted" into an HTML file. You can click "Preview \> Preview Notebook" (or "Knit \> Knit to HTML") to see the live HTML file as you are working on your R Notebook (just make sure to save to update), and you can find the shareable \*.html file in the same folder as your \*.Rmd-file. The \*.html file will have the same file name as your \*.Rmd file with ".nb" added to it.
-
-### Using Libraries {#libraries}
-
-When you install R, your computer can understand and execute a number of commands. This is what is known as "Base R". The power of R, however, is that you can expand the number of commands your computer can understand by installing and loading additional R packages (also called libraries). There are R packages specialized for pretty much any area of biology, providing a capability to analyze data from the level of genes and genomes to ecosystem level processes. We will frequently use a package called `ggplot2`, which allows for plotting data.
-
-#### Installing Libraries {.unnumbered}
-
-To successfully complete some of the R exercises, you will need to install additional libraries. To download and install new R packages, go to "Tools \> Install Packages..." and type in the name of the package you want to install (*e.g.*, "ggplot2"). Alternatively, you can use the `install.packages()` command as in the following code chunk:
-
-``` ruby
-#To install ggplot2, execute the following code:
-install.packages("ggplot2")
-```
-
-::: {.alert .alert-block .alert-warning}
-![](images/important.png){width="20"} **Important Note 1**
-
-You only need to install packages once unless you re-install R. I recommend deleting code chunks with `install.packages()` prompts after you run them successfully, or you can silence them by adding a hash tag in front of the particular line of code. Failure to deactivate package installation code can lead to errors during the knitting of HTML outputs.
-:::
-
-::: {.alert .alert-block .alert-warning}
-![](images/important.png){width="20"} **Important Note 2**
-
-Two common problems might occur when you are installing R packages. If it looks like you're installation process is just not making any progress, you might have to respond to queries in the Console:
-
-1.  Some installations require updates of packages that are already present. In that case, you will see a prompt in the Console that looks something like this: `Update all/some/none? [a/s/n]:` Just enter "a" and press enter.
-
-2.  Another common prompt is `Do you want to install from sources the package which needs compilation? [yes/no/cancel]:` In this case, enter "y" and press enter.
-:::
+In the [last chapter](what-evolution-is.html#r), you learned how to enter commands in the RStudio console to receive an output from R. This showed you the general principle of how you can prompt R to execute any function you want.
 
 #### Loading Libraries {.unnumbered}
 
-To make use of installed libraries, you also need to load the libraries *every time* you use R (*i.e.*, every time you restart the program). You can do this with the `library()` command, and you will find a code chunk prompting you to load all required libraries at the beginning of each R Notebook. For example, the following code chunk loads the `ggplot2` library:
+To make use of installed libraries, you also need to load the libraries *every time* you use R (*i.e.*, every time you restart the program). You can do this with the `library()` command, and you will find a code chunk prompting you to load all required libraries at the beginning of each R Notebook. For example, the following code chunk loads the `tidyverse` library:
 
 ```{r lib}
 #Note that loading a library does not lead to an output
-library(ggplot2)
+library(tidyverse)
 ```
 
 ::: {.alert .alert-block .alert-warning}
@@ -367,41 +314,20 @@ This means that the function name is either misspelled, or the library containin
 
 For most R exercises, you will work with real data sets that illuminate evolutionary concepts. Data sets will typically be provided as \*.csv files (which stands for comma-separated values). \*.csv files are essentially text files containing data tables, and you can also open these in any text editor or Excel. If you do so, you will see a data structure familiar from regular spreadsheets: different variables are organized in columns, and observations are organized in rows.
 
-#### Setting Your Working Directory {.unnumbered}
-
-Having a well-organized file structure is critical to avoid issues with coding, because you will frequently read in data files, and you need to make sure that R knows where to look for those files. Unless otherwise specified, R will only look for files you may want to import in a particular folder called the working directory. If you are not sure what your current working directory is, you can simply execute the command `getwd()` in the console, and R will tell your the current working directory.
-
-If you move the exercise files around (or if you are working on your own projects), you need to make sure that R is looking for the files in the right folder. To do so, you need to set the working directory with the `setwd()` command using the path to your specific folder.
-
-``` ruby
-setwd("Path")
-```
-
-Note that the path on a Mac usually looks something like this: `/Users/michitobler/Documents`
-
-On a Windows PC, it looks something like this: `C:\Users\michitobler\Documents`
-
-::: {.alert .alert-block .alert-warning}
-![](images/important.png){width="20"} **Important Note**
-
-If you don't want to deal with having to set your working directory, simply follow the advice from above: Retain your \*.Rmd file and all the additional files together in the same folder. If you open the \*.Rmd file by double-clicking, the working directory should be set automatically, and R will look in the right spot for files you may want to import.
-:::
-
 #### Reading a \*.csv File {.unnumbered}
 
-To import data in the form of \*.csv files, you can use R's `read.csv()` function. In the code chunk below, you can import a simple test data set ([test_data.csv](data/test_data.csv)) provided with this chapter that includes three variables: sex, length, and mass of individuals in a population.
+To import data in the form of \*.csv files, you can use R's `read_csv()` function. In the code chunk below, you can import a simple test data set [test_data.csv](data/test_data.csv) provided with this textbook that includes three variables: sex, length, and mass of individuals in a population.
 
 ```{r readcsv}
-#The line of code simply prompts the computer to read the "test_data.csv" file and generate a data.frame called test.data
-#Note that the file encoding flag simply indicates that the file was generated on a Mac (the operating system I use). It helps to prevent issues for Windows users.
-test.data <- read.csv("data/test_data.csv", fileEncoding = 'UTF-8-BOM')
+#The line of code simply prompts the computer to read the "test_data.csv" file and generate a data.frame called test_data
+test_data <- read_csv('data/test_data.csv')
 ```
 
-If this worked correctly, you should now see a new data frame called `test.data` in your work space (Global Environment; top right panel). You can double click it to view it or execute `View(test.data)` in the console as described on [Chapter 1](what-evolution-is.html#data-frame). There should be three columns: sex, length, and mass.
+If this worked correctly, you should now see a new data frame called `test_data` in your work space (Global Environment; top right panel). You can double click it to view it or execute `View(test.data)` in the console as described on [Chapter 1](what-evolution-is.html#data-frame). There should be three columns: sex, length, and mass.
 
 ### Graphing Data
 
-A key learning objective of this course is that you learn to visualize and interpret data to address different evolutionary hypotheses. In the following sections, I will explain step by step (that is code line by code line) how to make a simple graph with our test data. Let's aim to make a scatter plot showing the relationship between length and mass of individuals in the population. The process is not much different than sketching a graph by hand and layering different parts of the graph on top of each other, just that you use words (code) to make the computer draw. To graph data, we will primarily use the `ggplot()` function that comes with the `ggplot2` library.
+A key learning objective of this course is that you learn to visualize and interpret data to address different evolutionary hypotheses. In the following sections, I will explain step by step (that is code line by code line) how to make a simple graph with our test data. Let's aim to make a scatter plot showing the relationship between length and mass of individuals in the population. The process is not much different than sketching a graph by hand and layering different parts of the graph on top of each other, just that you use words (code) to make the computer draw. To graph data, we will primarily use the `ggplot()` function that comes with the `ggplot2` library, which is packaged in the `tidyverse`.
 
 #### Defining the Axes and Coordinate System {.unnumbered}
 
@@ -409,7 +335,7 @@ The first step of making any graph is to define the axes and establish the coord
 
 ```{r coord}
 #This line of code calls for the ggplot function (a plotting function) and makes a grid based on the test.data data frame, using length as the x axis and mass as the y axis
-ggplot(test.data, aes(x=length, y=mass))
+ggplot(test_data, aes(x=length, y=mass))
 ```
 
 The output is a simple coordinate system based on the data we provided, with length as the x-axis and mass as the y-axis.
@@ -419,7 +345,7 @@ The output is a simple coordinate system based on the data we provided, with len
 The second step is to draw the actual data into the established coordinate system. To do so, you just need to tell the program what kind of graph you want to draw. Different graph types in ggplot are referred to as geoms (geometries), and a scatter plot is designated as `geom_point()`. You can add that to your existing code describing the coordinate system with a plus sign.
 
 ```{r points}
-ggplot(test.data, aes(x=length, y=mass)) +
+ggplot(test_data, aes(x=length, y=mass)) +
   geom_point()
 ```
 
@@ -431,7 +357,7 @@ Whenever we look at the relationship between two variables, we may want to add a
 
 ```{r trend, message=FALSE}
 #The code within the brackets of the geom_smooth command specifies some additional options, namely that we want to draw a straight line (method="lm") and that we do not want to show the confidence interval (se=FALSE).
-ggplot(test.data, aes(x=length, y=mass)) +
+ggplot(test_data, aes(x=length, y=mass)) +
   geom_point() +
   geom_smooth(method="lm", se=FALSE)
 ```
@@ -442,7 +368,7 @@ The variable names in the data frame do not always provide the clearest descript
 
 ```{r labels, message=FALSE}
 #Simply add the new label text in quotation marks
-ggplot(test.data, aes(x=length, y=mass)) +
+ggplot(test_data, aes(x=length, y=mass)) +
   geom_point() +
   geom_smooth(method="lm", se=FALSE) +
   xlab("Body length in cm") +
@@ -456,7 +382,7 @@ Note that an alternative way of changing the axes labels is to use the `labs()` 
 If you look at the data frame, you will see that we do not only have information about the length and mass of individuals in the population, but also their sex. So, we may want to account for potential sex differences in the relationship between length and mass. To do so, we can color-code individual points based on the sex of the individual by adding another term of the aesthetics of the `ggplot()` function (`color=sex`):
 
 ```{r groups, message=FALSE}
-ggplot(test.data, aes(x=length, y=mass, color=sex)) +
+ggplot(test_data, aes(x=length, y=mass, color=sex)) +
   geom_point() +
   geom_smooth(method="lm", se=FALSE) +
   xlab("Body length in cm") +
@@ -465,69 +391,83 @@ ggplot(test.data, aes(x=length, y=mass, color=sex)) +
 
 As you can see, this not only changes the color of individual points, but it also draws a separate regression line for males and females. If you want to change the legend title, you can do this again with the `labs()` function: `labs(x="Body length in cm", y="Body mass in kg", color="Sex")` .
 
-#### Optional: Changing the Theme {.unnumbered}
+#### Changing to a Colorblind-Friendly Palette {.unnumbered}
 
-I honestly just hate the default theme of `ggplot()` with its gray background. But you can quickly alter the look of a graph by switching to a number of other possible themes. I personally like the `theme_classic()`, but you can customize the look of your graph with any theme you may like (see [here](https://www.datanovia.com/en/blog/ggplot-themes-gallery/#basic-ggplot)).
+ggplot uses a default color palette when you add color to a graph. You may not like that default color scheme, or---if you have impaired color perception---you may find it difficult to distinguish some of the default colors. One simple way of changing the color palette of your graph is to add viridis coloration to your plot. 
 
-```{r theme, message=FALSE}
-ggplot(test.data, aes(x=length, y=mass, color=sex)) +
-  geom_point() +
-  geom_smooth(method="lm", se=FALSE) +
-  xlab("Body length in cm") +
-  ylab("Body mass in kg") +
-  theme_classic()
-```
-
-#### Optional: Changing to a Colorblind-Friendly Palette {.unnumbered}
-
-ggplot uses a default color palette when you add color to a graph. You may not like that default color scheme, or---if you have impaired color perception---you may find it difficult to distinguish some of the default colors. One simple way of changing the color palette of your graph is to use the `RColorBrewer` package. If you want to use it, you first need to install that library on your computer, just like you did for `ggplot2` above:
-
-``` ruby
-#To install RColorBrewer, execute the following code in your Console:
-install.packages("RColorBrewer")
-```
-
-`RColorBrewer` includes several color palettes, including options that have been developed for people with color blindness. To see the different colorblind-friendly options, you can simply use the following function:
-
-```{r RColBrew, fig.height=3.5, fig.width=6}
-display.brewer.all(colorblindFriendly = TRUE)
-```
-
-To change the color scheme of the graph generated with the `ggplot()`, you can simply use the `scale_color_brewer()` function to designate the desired palette:
+To change the color scheme of the graph generated with the `ggplot()`, you can simply use the `+ scale_colour_viridis_d()` function to designate the desired palette:
 
 ```{r coltheme, message=FALSE}
-ggplot(test.data, aes(x=length, y=mass, color=sex)) +
+ggplot(test_data, aes(x=length, y=mass, color=sex)) +
   geom_point() +
   geom_smooth(method="lm", se=FALSE) +
   xlab("Body length in cm") +
   ylab("Body mass in kg") +
-  theme_classic()+
-  scale_color_brewer(palette="Dark2")
+  scale_colour_viridis_d()
 ```
+
+Note the `d` at the end of the function stands for discrete as you have two discrete categories of data.
 
 #### Generating and Visualizing Aggregate Data {.unnumbered}
 
-In the exercise associated with this chapter, you will not be plotting data from individuals but rather aggregate data that is compiled from many individuals and provides a mean and a measurement of variation around a mean for different sampling groups. To show you how we can visualize such data as mean (± variation), I am first calculating the mean and standard deviation (sd) of length separate for each sex based on the data above using the `ddply()` function from the `plyr` package.
+In the exercise associated with this chapter, you will not be plotting data from individuals but rather aggregate data that is compiled from many individuals and provides a mean and a measurement of variation around a mean for different sampling groups. To show you how we can visualize such data as mean (± variation), we need to first calculate the mean and standard deviation (sd) of length separate for each sex based on the data above.
 
-```{r meancalc, warning=FALSE}
-#Load the plyr package that includes the ddply function
-library(plyr)
+To do this, we will use the `group_by` and `summarize` functions to create a new variable where each subset of data is labeled. First, tell `group_by` the name of the data you want to divide into subsets, followed by the columns you want to include.
 
-#Use the ddply function to calculate mean and standard deviation of length for each sex
-sum.stat <- ddply(test.data,~sex,summarise,mean=mean(length),sd=sd(length))
-print(sum.stat)
+
+```{r gb}
+grouped_test_data <- group_by(test_data, sex)
 ```
 
-To visualize means and standard variations, we can again use the `ggplot()` function with sex on the x axis and the mean value of length on the y axis (note that we are now referring to the `sum.stat` data frame that we just created in the last code chunk). As before, we are using `geom_point()` to draw our data as points. In addition, we are using `geom_errorbar()` to draw the standard deviations around the mean in both directions. You already know all the other code elements from above.
+Next we calculate the mean and sd for each group, and put this into a new variable.
+The name of the column containing the mean (calculated using the function `mean`) is "mean".
+The name of the column containing the sd (calculated using the function `sd`) is "sd".
+
+
+```{r sm}
+summary_test_data <- summarise(grouped_test_data,mean=mean(length),sd=sd(length))
+
+```
+
+Click on the variable in your Environment to view your new summary table.
+
+To visualize means and standard deviations, we can again use the `ggplot()` function with sex on the x axis and the mean value of length on the y axis (note that we are now referring to the `summary_test_data` data frame that we just created). As before, we are using `geom_point()` to draw our data as points. In addition, we are using `geom_errorbar()` to draw the standard deviations around the mean in both directions. You already know all the other code elements from above.
 
 ```{r meanplot}
-ggplot(sum.stat, aes(x=sex, y=mean)) +
+ggplot(summary_test_data, aes(x=sex, y=mean)) +
   geom_point() +
-  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=0.1)  +  #widfth designates the width of the horizontal bars
+  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=0.1)  +  #width designates the width of the horizontal bars
   xlab("Sex") +
-  ylab("Mean length [mm]") +
-  theme_classic()
+  ylab("Mean length [mm]")
 ```
+
+You can't say whether the mean values for male and female length are different from the graph alone.
+Obviously, the mean values are not equal, but whether they are significantly different depends on the variation in the samples as well as the number of samples.
+We observe that the error bars overlap, but that doesn't mean that the mean values are or are not different.
+To determine whether the mean values are different we need to use a statistical analysis.
+When we have two categories of data we can use a t-test with the `t.test` function in R.
+The null hypothesis is that the two means are equal, and the alternative is that they are not.
+
+The t.test function takes two "arguments" - one vector of each category of data.
+To get our first vector we need to `filter` our original test dataset for females (i.e. cases where we observe the value 'female' in the `sex` column).
+
+```{r filter}
+female_test_data <- filter(test_data, sex == 'female')
+```
+
+Now you should be able to repeat this to get `male_test_data`.
+
+```{r filter2, echo=FALSE}
+male_test_data <- filter(test_data, sex == 'male')
+```
+
+Now we can compare the `sex` columns of these two datasets.
+
+```{r t}
+t.test(female_test_data$length, male_test_data$length)
+```
+
+What do you conclude about whether males and females differ?
 
 ## Reflection Questions
 

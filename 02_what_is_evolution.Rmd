@@ -96,45 +96,17 @@ Darwin's fundamental insights were possible because of a fundamental shift in ho
 
 ## Practical Skills: Getting Started with R
 
-During this course, you will learn about evolution *and* practice being a scientist by visualizing and interpreting data on a weekly basis. To do so, we will use an open-source software called R. This section provides instructions for installing R and a companion program (RStudio) on your Mac or PC.
+During this course, you will learn about evolution *and* practice being a scientist by visualizing and interpreting data on a weekly basis. To do so, we will use an open-source software called R. This section provides instructions for accessing R using URI's RStudio web server.
 
 ### What are R and RStudio?
 
-R is a programming language for statistical analysis and data visualization, and over the past decades, it has become one of the most critical and universally used tools in the life sciences. RStudio is a convenient interface that allows you to easily write, organize, and execute your R code; it's the program we will use throughout the semester for weekly assignments. Note that RStudio will not run unless R is already installed.
+R is a programming language for statistical analysis and data visualization, and over the past decades, it has become one of the most critical and universally used tools in the life sciences. RStudio is a convenient interface that allows you to easily write, organize, and execute your R code; it's the program we will use throughout the semester for weekly assignments. 
 
-### Installing R
+### Accessing RStudio
 
-To run R and RStudio on your system, complete the following steps in the right order (*i.e.*, you need to install R before you can install RStudio). Although we recommend the use of Windows or Mac OS for this class, R is also available for [Linux](https://cran.r-project.org/bin/linux/ubuntu/), and it can be installed on [Google Chromebooks](https://blog.sellorm.com/2018/12/20/installing-r-and-rstudio-on-a-chromebook/). Please note that any code used in this course has not been troubleshot on the latter two platforms.
-
-#### For Windows {.unnumbered}
-
--   [Download the binary setup file for R 4.2.x](https://cran.r-project.org/bin/windows/base/)
-
--   Open the downloaded \*.exe file and follow the instructions to install R
-
--   [Download the binary setup file for Rtools40](https://cran.r-project.org/bin/windows/Rtools/)
-
--   Open the downloaded \*.exe file and follow the instructions to install Rtools
-
-#### For Mac {.unnumbered}
-
--   Check the version on your operating system (click the Apple logo on your desktop and choose "About This Mac"). If your macOS version is 10.14 or older, please [first update your computer to a newer macOS version](https://support.apple.com/en-us/HT201541). If you do not update your computer first, R and RStudio may still install properly, but you will run into compatibility issues later in the semester when use different packages within R.
-
--   Download the .pkg file for R 4.2.x form the following link: <https://cran.r-project.org/bin/macosx/>
-
--   Open the downloaded \*.pkg file and follow the instructions to install R
-
-### Installing RStudio
-
-[Download the free, open-source version of RStudio Desktop](https://www.rstudio.com/products/rstudio/download/) by choosing the appropriate installer file for your operating system and then run it to install RStudio. If you are using Mac, make sure to move the RStudio app to your actual Applications folder (rather than starting it from the disk image).
-
-### Checking the Successful Installation
-
-Once you completed the steps above, we recommend that you launch RStudio and make sure it starts without any errors. If the installation was successful, the RStudio interface should look something like Figure \@ref(fig:interface):
-
-```{r interface, echo=FALSE, out.width='100%', fig.cap = "Screenshot of the RStudio interface."}
-knitr::include_graphics('images/rstudio_interface.png')
-```
+* Go to [https://rstudio.uri.edu/](https://rstudio.uri.edu/)
+* Log in using your URI email address minus the `@uri.edu`
+* Use your student id number as your password
 
 ### Some R and RStudio Basics
 
@@ -152,14 +124,27 @@ It's really simple, and you can try it out right now! Just type `2+2`, press ent
 2+2
 ```
 
-R pretty much operates like a calculator and can perform any calculation you might need. R can also deal with logical variables, and respond to queries about whether logic statements are true or false. For example, you can use logical operators [`>` (greater than), `<` (smaller than), `==` (equals), `!=` (not-equals)] to contrast statements, and R will assess them:
+You will notice if you type a lot the information gradually scrolls off the screen.
+It's helpful to be able to go back and reference prior work.
+It's also helpful to generally stay organized as we'll have multiple projects in this class.
+
+Let’s start by getting organized. Because RStudio provides a mechanism for setting up projects we will use this to stay organized. 
+
+* In the RStudio File menu select New Project - New Directory - New Project.
+* Give the project a name (e.g. learningR). For this and all future work ensure that names never include spaces.
+ * Create Project. By creating a new project you have created a folder for your work. When using projects whenever you come back to this project you will return to the same setup. This allows you to switch projects with different folders and open files.
+* From the File menu select New File - R script to show a fourth pane in the upper left corner.
+* Save your script (it will be saved automatically in your project folder). Now, when you type in this script all your code will stay here. From now on type your code in your script and click the `Run` button to run it.
+
+As you have already seen,
+R can operate like a calculator and can perform any calculation you might need. R can also deal with logical variables, and respond to queries about whether logic statements are true or false. For example, you can use logical operators [`>` (greater than), `<` (smaller than), `==` (equals), `!=` (not-equals)] to contrast statements, and R will assess them:
 
 ```{r basic2}
-5*2>sqrt(100) #note that sqrt starts for square-root
+5*2>100
 ```
 
 ```{r basic 2.2}
-5*2==sqrt(100)
+5*2==10
 ```
 
 #### Working with Variables {.unnumbered}
@@ -170,7 +155,7 @@ One of the strengths of R is that it cannot only perform basic calculations usin
 x <- 5
 ```
 
-Notice when you run that code, you created a new variable x with the value 5 that shows up in your work space on the top-right panel. Once you have a variable defined, you can use it in calculations and logic statements as described above:
+Notice when you run that code, you created a new variable x with the value 5 that shows up in your Environment on the top-right panel. Once you have a variable defined, you can use it in calculations and logic statements as described above:
 
 ```{r basic4}
 x^2
@@ -191,7 +176,7 @@ x3 = 2
 If you use these variables in a complex equation, you need to just write the equation once, and you can tweak the input variables to explore the effects of different values.
 
 ```{r basic7}
-x1*(x1+x2+x3)/(x1^2+x2^2+x3^2)
+x1*(x1+x2+x3)
 ```
 
 #### Vectors {.unnumbered}
@@ -232,7 +217,7 @@ R can execute a wide variety of functions that take some input and provide an ou
 sqrt(x)
 ```
 
-We can also apply the same function to a vector, in which case the function is applied to every number in the vector:
+Note that if `x` was a list of numbers (referred to as a vector), the function is applied to every number in the vector.
 
 ```{r basic13}
 sqrt(y)
@@ -241,17 +226,17 @@ sqrt(y)
 Sometimes we want to use the output of one function as an input for another function. In this case, it makes sense to store the output of a function in a new object:
 
 ```{r basic14}
-sqrt.y <- sqrt(y)
-print(sqrt.y)
+sqrt_y <- sqrt(y)
+print(sqrt_y)
 ```
 
 Note that this code again created a new object called `sqrt.y` in your work space, and you can call on it using `print()` to display it in the console. We can now also use the new values as input for another function. For example, we can calculate the average of these values using the `mean()` function:
 
 ```{r basic15}
-mean(sqrt.y)
+mean(sqrt_y)
 ```
 
-Over the course of the semester, you will get to know a wide variety of functions in R that will allow you to make complex plots and analyze genetic and phenotypic data to make evolutionary inferences. R already knows a large number of functions upon installation, but you can essentially teach it limitless new functions by installing so-called libraries (or packages). There are [thousands of libraries for R](https://cran.r-project.org/web/packages/available_packages_by_name.html), and they contain functions to analyze and visualize all kinds of biological data, from the structure of genomes to the composition of ecological communities. You will learn how to install new libraries and apply the functions they contain in [Chapter 2](evidence-for-evolution.html#libraries).
+Over the course of the semester, you will get to know a wide variety of functions in R that will allow you to make complex plots and analyze genetic and phenotypic data to make evolutionary inferences. R already knows a large number of functions upon installation, but you can essentially teach it limitless new functions by installing so-called libraries (or packages). There are [thousands of libraries for R](https://cran.r-project.org/web/packages/available_packages_by_name.html), and they contain functions to analyze and visualize all kinds of biological data, from the structure of genomes to the composition of ecological communities.
 
 #### Data Frames {.unnumbered}
 
@@ -289,14 +274,6 @@ Each of the columns in the data frame contains one of the variables, with the na
 ```{r basic18}
 df$size
 ```
-
-This is just like any other vector, in that we can refer to its individual values using square brackets, as we did with regular vectors:
-
-```{r basic19}
-df$size[3]
-```
-
-In reality, you will rarely have to build your own data frame in this class, because we will provide you will real data from classic studies and our own research that you can read into R. You will learn how to do that in [Chapter 2](evidence-for-evolution.html#import-data).
 
 #### Help Functions {.unnumbered}
 

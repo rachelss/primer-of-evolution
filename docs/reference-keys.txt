@@ -2,7 +2,6 @@ fig:campanula
 fig:lamarck
 fig:beaglemap
 fig:finches
-fig:interface
 fig:df1
 fig:stickleback
 fig:speccont
@@ -263,9 +262,7 @@ distinguishing-between-pattern-and-process
 population-thinking
 practical-skills-getting-started-with-r
 what-are-r-and-rstudio
-installing-r
-installing-rstudio
-checking-the-successful-installation
+accessing-rstudio
 some-r-and-rstudio-basics
 additional-resources
 alternative-evolution-textbooks
@@ -291,7 +288,6 @@ absence-of-evidence
 case-study-darwins-finches
 practical-skills-r-notebooks-and-plotting-with-ggplot
 r-notebooks
-libraries
 import-data
 graphing-data
 reflection-questions-1

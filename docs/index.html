@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>A Primer of Evolution</title>
   <meta name="description" content="An Introduction to Evolutionary Thought: Theory, Evidence, and Practice" />
-  <meta name="generator" content="bookdown 0.32 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
 
   <meta property="og:title" content="A Primer of Evolution" />
   <meta property="og:type" content="book" />
@@ -138,6 +138,10 @@ code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -186,10 +190,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.3" data-path="what-evolution-is.html"><a href="what-evolution-is.html#practical-skills-getting-started-with-r"><i class="fa fa-check"></i><b>1.3</b> Practical Skills: Getting Started with R</a>
 <ul>
 <li class="chapter" data-level="1.3.1" data-path="what-evolution-is.html"><a href="what-evolution-is.html#what-are-r-and-rstudio"><i class="fa fa-check"></i><b>1.3.1</b> What are R and RStudio?</a></li>
-<li class="chapter" data-level="1.3.2" data-path="what-evolution-is.html"><a href="what-evolution-is.html#installing-r"><i class="fa fa-check"></i><b>1.3.2</b> Installing R</a></li>
-<li class="chapter" data-level="1.3.3" data-path="what-evolution-is.html"><a href="what-evolution-is.html#installing-rstudio"><i class="fa fa-check"></i><b>1.3.3</b> Installing RStudio</a></li>
-<li class="chapter" data-level="1.3.4" data-path="what-evolution-is.html"><a href="what-evolution-is.html#checking-the-successful-installation"><i class="fa fa-check"></i><b>1.3.4</b> Checking the Successful Installation</a></li>
-<li class="chapter" data-level="1.3.5" data-path="what-evolution-is.html"><a href="what-evolution-is.html#some-r-and-rstudio-basics"><i class="fa fa-check"></i><b>1.3.5</b> Some R and RStudio Basics</a></li>
+<li class="chapter" data-level="1.3.2" data-path="what-evolution-is.html"><a href="what-evolution-is.html#accessing-rstudio"><i class="fa fa-check"></i><b>1.3.2</b> Accessing RStudio</a></li>
+<li class="chapter" data-level="1.3.3" data-path="what-evolution-is.html"><a href="what-evolution-is.html#some-r-and-rstudio-basics"><i class="fa fa-check"></i><b>1.3.3</b> Some R and RStudio Basics</a></li>
 </ul></li>
 <li class="chapter" data-level="1.4" data-path="what-evolution-is.html"><a href="what-evolution-is.html#additional-resources"><i class="fa fa-check"></i><b>1.4</b> Additional Resources</a>
 <ul>
@@ -228,9 +230,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.9" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#practical-skills-r-notebooks-and-plotting-with-ggplot"><i class="fa fa-check"></i><b>2.9</b> Practical Skills: R Notebooks and Plotting with ggplot</a>
 <ul>
 <li class="chapter" data-level="2.9.1" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#r-notebooks"><i class="fa fa-check"></i><b>2.9.1</b> R Notebooks</a></li>
-<li class="chapter" data-level="2.9.2" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#libraries"><i class="fa fa-check"></i><b>2.9.2</b> Using Libraries</a></li>
-<li class="chapter" data-level="2.9.3" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#import-data"><i class="fa fa-check"></i><b>2.9.3</b> Importing Data</a></li>
-<li class="chapter" data-level="2.9.4" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#graphing-data"><i class="fa fa-check"></i><b>2.9.4</b> Graphing Data</a></li>
+<li class="chapter" data-level="2.9.2" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#import-data"><i class="fa fa-check"></i><b>2.9.2</b> Importing Data</a></li>
+<li class="chapter" data-level="2.9.3" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#graphing-data"><i class="fa fa-check"></i><b>2.9.3</b> Graphing Data</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#reflection-questions-1"><i class="fa fa-check"></i><b>2.10</b> Reflection Questions</a></li>
 <li class="chapter" data-level="2.11" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#references-2"><i class="fa fa-check"></i><b>2.11</b> References</a></li>
@@ -598,7 +599,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1 class="title">A Primer of Evolution</h1>
 <h2 class="subtitle"><em>An Introduction to Evolutionary Thought: Theory, Evidence, and Practice</em></h2>
 <p class="author"><em>Michi Tobler</em></p>
-<p class="date"><em>Updated on 2023-06-23</em></p>
+<p class="date"><em>Updated on 2023-09-08</em></p>
 </div>
 <div id="preface" class="section level1 unnumbered hasAnchor">
 <h1>Preface<a href="index.html#preface" class="anchor-section" aria-label="Anchor link to header"></a></h1>

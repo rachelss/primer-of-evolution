@@ -267,9 +267,8 @@ p9
 
 ## Practical Skills: Modeling Selection {#practical-skills}
 
-All selection models you will run for this chapter's exercise are implemented in the R package `learnPopGen`. Before you start with the exercise, make sure to install the package by executing `install.packages("learnPopGen")` in the Console. Alternatively, you can click *Tools\>Install Packages...* in the RStudio menu, type "learnPopGen", and click *Install*.
-
-After the installation, make sure to load the package using the `library()` function when you restart R:
+All selection models you will run for this chapter's exercise are implemented in the R package `learnPopGen`. 
+Load the package using the `library()` function.
 
 ```{r lpopg}
 library(learnPopGen)
