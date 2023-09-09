@@ -293,9 +293,9 @@ In the [last chapter](what-evolution-is.html#r), you learned how to enter comman
 
 #### Loading Libraries {.unnumbered}
 
-To make use of installed libraries, you also need to load the libraries *every time* you use R (*i.e.*, every time you restart the program). You can do this with the `library()` command, and you will find a code chunk prompting you to load all required libraries at the beginning of each R Notebook. For example, the following code chunk loads the `tidyverse` library:
+To make use of installed libraries, you also need to load the libraries *every time* you use R (*i.e.*, every time you restart the program). You can do this with the `library()` command. The following code chunk loads the `tidyverse` library with most of the basic functions you will need for plotting and data manipulation:
 
-```{r lib}
+```{r lib, warning=FALSE, message=FALSE}
 #Note that loading a library does not lead to an output
 library(tidyverse)
 ```
@@ -318,12 +318,17 @@ For most R exercises, you will work with real data sets that illuminate evolutio
 
 To import data in the form of \*.csv files, you can use R's `read_csv()` function. In the code chunk below, you can import a simple test data set [test_data.csv](data/test_data.csv) provided with this textbook that includes three variables: sex, length, and mass of individuals in a population.
 
-```{r readcsv}
+```{r readcsv, echo = FALSE}
 #The line of code simply prompts the computer to read the "test_data.csv" file and generate a data.frame called test_data
 test_data <- read_csv('data/test_data.csv')
 ```
 
-If this worked correctly, you should now see a new data frame called `test_data` in your work space (Global Environment; top right panel). You can double click it to view it or execute `View(test.data)` in the console as described on [Chapter 1](what-evolution-is.html#data-frame). There should be three columns: sex, length, and mass.
+```{r readcsv2, eval = FALSE}
+#The line of code simply prompts the computer to read the "test_data.csv" file and generate a data.frame called test_data
+test_data <- read_csv('https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/test_data.csv')
+```
+
+If this worked correctly, you should now see a new data frame called `test_data` in your work space (Global Environment; top right panel). You can double click it to view it or execute `View(test_data)` in the console as described on [Chapter 1](what-evolution-is.html#data-frame). There should be three columns: sex, length, and mass.
 
 ### Graphing Data
 
@@ -474,7 +479,7 @@ What do you conclude about whether males and females differ?
 
 ## Case study: Darwin's Finches
 
-One of the most iconic study systems in evolutionary biology are Darwin's finches on the Galapagos Islands. Rosemary and Peter Grant spent much of their lives devoted to the study of these bird, examining how their traits change in response to major ecological perturbations. To do so, they collected a massive, long-term data set on different traits of the medium ground finch (*Geospiza fortis*) population on Daphne Major Island. For this exercise, we will take a look at their beak size data from 1972-1994.
+One of the most iconic study systems in evolutionary biology are Darwin's finches on the Galapagos Islands. Rosemary and Peter Grant spent much of their lives devoted to the study of these birds, examining how their traits change in response to major ecological perturbations. To do so, they collected a massive, long-term data set on different traits of the medium ground finch (*Geospiza fortis*) population on Daphne Major Island. For this exercise, we will take a look at their beak size data from 1972-1994.
 
 ![](https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/finch.jpg)
 

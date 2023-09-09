@@ -230,7 +230,7 @@ sqrt_y <- sqrt(y)
 print(sqrt_y)
 ```
 
-Note that this code again created a new object called `sqrt.y` in your work space, and you can call on it using `print()` to display it in the console. We can now also use the new values as input for another function. For example, we can calculate the average of these values using the `mean()` function:
+Note that this code again created a new object called `sqrt_y` in your work space, and you can call on it using `print()` to display it in the console. We can now also use the new values as input for another function. For example, we can calculate the average of these values using the `mean()` function:
 
 ```{r basic15}
 mean(sqrt_y)
