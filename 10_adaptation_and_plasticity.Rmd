@@ -578,10 +578,10 @@ In data sets you have worked with so far, you explored the relationship between 
 
 ### Example 1: Many Independent Variables
 
-The first example deals with a case where a dependent variable is associated with more than two independent variables that we might want to consider. Imagine for example that we wanted to explore the effects of an environmental toxicant on variation in plant biomass. To do so, we conducted a common garden experiment, where we sampled plants from populations in the polluted and unpolluted habitat, and we planted individuals from each population in both polluted and unpolluted soils. In addition, we did this for two species, and because both species are dioecious and exhibit sexual dimorphism, we need to analyze data for each sex separately. I know... it's lot... but just check out the [data set](data/9_complex1.csv): you have one dependent variable (mass) and four independent variables (population, soil type, species, and sex):
+The first example deals with a case where a dependent variable is associated with more than two independent variables that we might want to consider. Imagine for example that we wanted to explore the effects of an environmental toxicant on variation in plant biomass. To do so, we conducted a common garden experiment, where we sampled plants from populations in the polluted and unpolluted habitat, and we planted individuals from each population in both polluted and unpolluted soils. In addition, we did this for two species, and because both species are dioecious and exhibit sexual dimorphism, we need to analyze data for each sex separately. I know... it's lot... but just check out the [data set](9_complex1.csv): you have one dependent variable (mass) and four independent variables (population, soil type, species, and sex):
 
 ```{r out.width='100%'}
-ex1 <- read.csv("data/9_complex1.csv")
+ex1 <- read.csv("https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/9_complex1.csv")
 head(ex1)
 ```
 
@@ -613,7 +613,7 @@ Plotting the different subsets of data in different panels with the same x- and 
 A similar problem presents itself when a relatively simple experiment measures many variables at the same time. Imagine, for example, that we were interested in understanding how different levels of pollution impact the expression of different genes. In this case we may have only one independent variable (level of pollution) but many independent variables (expression data for different genes):
 
 ```{r out.width='100%'}
-ex2 <- read.csv("data/9_complex2.csv")
+ex2 <- read.csv("https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/9_complex2.csv")
 head(ex2)
 ```
 

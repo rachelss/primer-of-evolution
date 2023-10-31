@@ -104,11 +104,11 @@ Finally, we can infer a phylogenetic tree based on the phylogenetic distance mat
 library(ape)
 
 #Calculate neighbor-joining tree
-hemoTree <- ape::nj(d)
+hemoTree <- nj(d)
 #Designate an outgroup to root the tree
-hemoTree<-root(hemoTree, "HBA1_Danio_rerio")
+hemoTree <- root(hemoTree, "HBA1_Danio_rerio")
 #Plot the tree
-ggtree(hemoTree) + geom_tiplab() +xlim(0,0.6)
+ggtree(hemoTree) + geom_tiplab() + xlim(0,0.6)
 ```
 :::
 
@@ -247,6 +247,8 @@ Besides the seasonal flu, which ravages across the planet in annual cycles, ther
 Where do these radically different antigenic sites come from? Humans are not the only organisms that can contract the influenza A viruses; they also infect other vertebrates (especially other mammals and birds). Due to long coevolutionary histories, different host groups exhibit different flu strains, with reciprocal adaptations in the hosts and pathogens. However, cross-infections can occur, especially when humans work in close contact with animals (*e.g.*, on pig or poultry farms). In most instances, cases of cross-infection are evolutionary dead ends because the viruses---poorly adapted to the novel host---cannot be transmitted from human to human. However, if a cross-infection occurs in a host that is already infected with a human influenza A strain, genetic segments from the different strains can mix to produce a novel third strain. This process is called viral reassortment, and the resulting strain can inherit the capability to transmit from human to human, while simultaneously exhibiting drastically different surface proteins that cause severe courses of disease.
 
 ## Practical Skills: Working with Phylogenetic Trees
+
+***Note that if you are using the URI RStudio Server you should check that you are using R 4.1.2***
 
 The exercise associated with this chapter will primarily focus on visualizing phylogenetic trees and associated metadata and interpreting data from molecular evolution analyses. To do so, you will use some new R functions from packages you have not previously used. Note that you will not have to write the more complex code associated with this exercise from scratch; some information in this section just provides additional context if you want to dig deeper.
 
