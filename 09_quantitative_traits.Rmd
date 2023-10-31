@@ -431,7 +431,7 @@ As you can see, successfully importing the data does not only create a new objec
 
 Before we actually take a stab at QTL mapping, let's explore the raw data. The `plotMap()` function graphs a genetic (or linkage) map, which shows the position of loci (markers) relative to each other. In well-assembled genomes, linkage blocks correspond to the actual chromosomes, and the linkage map shows the chromosomal location of each marker with a horizontal dash. The dataset we are looking at contains genotype information for each marker present in our genetic map. As you can see in the case of the bed bugs, some chromosomes are larger than others, and some chromosomal regions vary in marker density.
 
-```{r out.width='100%', fig.cap="Genetic map of markers included in the `bedbug` data frame. Different chomosomes are aligned along the x-axis, and the relative positions of markers on each chromosome are indicated with horizontal dashes along the y-axis."}
+```{r bedbug_map, out.width='100%', fig.cap="Genetic map of markers included in the `bedbug` data frame. Different chomosomes are aligned along the x-axis, and the relative positions of markers on each chromosome are indicated with horizontal dashes along the y-axis."}
 plotMap(bedbugs, show.marker.names = FALSE)
 ```
 

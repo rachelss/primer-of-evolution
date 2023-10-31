@@ -2,7 +2,7 @@
 title: "A Primer of Evolution"
 subtitle: "An Introduction to Evolutionary Thought: Theory, Evidence, and Practice"
 author: "Michi Tobler"
-date: "Updated on `r Sys.Date()`"
+date: "Updated by Rachel Schwartz for the University of Rhode Island on `r Sys.Date()`"
 documentclass: book
 description: "An Introduction to Evolutionary Thought: Theory, Evidence, and Practice"
 always_allow_html: true

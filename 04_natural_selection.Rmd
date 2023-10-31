@@ -63,7 +63,7 @@ df <- as.data.frame(cbind(x,y1,y2,y3))
 ggplot(df)+
     geom_line(aes(x=x,y=y2), color="#66c2a5")+
     geom_line(aes(x=x,y=y3), color="#fc8d62")+
-    geom_line(aes(x=x,y=y1), color="#8da0cb", size=1.5)+
+    geom_line(aes(x=x,y=y1), color="#8da0cb", linewidth=1.5)+
     theme_classic()+
     theme(axis.text.x=element_blank(), axis.ticks.x=element_blank()) +
     theme(axis.text.y=element_blank(), axis.ticks.y=element_blank()) +
@@ -356,11 +356,11 @@ ggplot(test.data, aes(length)) +
     theme_classic()
 ```
 
-Similar to how regressions provide a best-fit line through a cloud of points, density functions can be used to provide a statistical representation of a trait's distribution. Density plots represent smoothed versions of histograms and can be visualized using `geom_density()`. Unlike histograms, which use counts as units on the y-axis, density plots use relative frequency (number of observations in a bin divided by the total number of observations). To avoid issues with scale, you have to modify the aesthetics of `geom_histogram()` with `aes(y=..density..)` when you combine the two graphical elements:
+Similar to how regressions provide a best-fit line through a cloud of points, density functions can be used to provide a statistical representation of a trait's distribution. Density plots represent smoothed versions of histograms and can be visualized using `geom_density()`. Unlike histograms, which use counts as units on the y-axis, density plots use relative frequency (number of observations in a bin divided by the total number of observations). To avoid issues with scale, you have to modify the aesthetics of `geom_histogram()` with `aes(y = after_stat(density))` when you combine the two graphical elements:
 
 ```{r histdensex, message=FALSE}
 ggplot(test.data, aes(length)) +
-    geom_histogram(aes(y=..density..)) +
+    geom_histogram(aes(y = after_stat(density))) +
     geom_density() +
     xlab("Length [mm]") +
     ylab("Frequency") +

@@ -116,8 +116,7 @@ fig:allozyme
 fig:alignment
 fig:assembly
 fig:hemealig
-tab:unnamed-chunk-8
-fig:unnamed-chunk-9
+tab:unnamed-chunk-9
 eq:37
 fig:numtree
 fig:molc
@@ -143,10 +142,9 @@ fig:dissel
 fig:qtl1
 fig:qtl2
 fig:beachmouse
-fig:unnamed-chunk-21
-tab:unnamed-chunk-22
-fig:unnamed-chunk-23
-fig:unnamed-chunk-26
+tab:unnamed-chunk-21
+fig:unnamed-chunk-22
+fig:unnamed-chunk-25
 fig:giraffe
 fig:phylpseurepl
 fig:sunfishes
@@ -221,8 +219,8 @@ fig:sellong
 fig:delmu
 fig:antpleim
 fig:natage
-tab:unnamed-chunk-38
-tab:unnamed-chunk-40
+tab:unnamed-chunk-37
+tab:unnamed-chunk-39
 fig:ltgraph
 fig:seir
 eq:47

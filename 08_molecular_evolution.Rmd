@@ -55,19 +55,27 @@ Generally speaking, molecular phylogenies group species based on genetic similar
 ::: {.alert .alert-block .alert-info}
 <b>A Practical Example in R</b>
 
+***Note that if you are using the URI RStudio Server you should check that you are using R 4.1.2***
+
 Simple phylogenetic trees can be inferred in R, and I want to provide a practical example of the different steps involved to illustrate the general process. This pipeline uses the R packages `Biostrings` (for importing data), `msa` (for aligning sequences), `ggmsa` (for plotting the alignment), `seqinr` (for calculating the distance matrix), and `ape` (for the generation of the tree).
 
 First, we read in a set of nucleotide or amino acid sequences and align them for further analysis. The example here includes amino acid sequences of the hemoglobin ⍺1 gene for 17 species of vertebrates, including humans:
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, eval= FALSE}
 #Read in sequences
-hemoSeq <- Biostrings::readAAStringSet(system.file("examples/HemoglobinAA.fasta", package="msa"))
+hemoSeq <- Biostrings::readAAStringSet("~/../shared/272/msa_examples/HemoglobinAA.fasta")
+```
+
+```{r message=FALSE, warning=FALSE, echo = FALSE}
+#Read in sequences
+hemoSeq <- Biostrings::readAAStringSet("data/HemoglobinAA.fasta")
 ```
 
 ```{r results='hide', message=FALSE, warning=FALSE}
 #Align sequences
-hemoAln <- msa::msa(hemoSeq)
-hemoAln2 <- msa::msaConvert(hemoAln, type="seqinr::alignment")
+library(msa)
+hemoAln <- msa(hemoSeq)
+hemoAln2 <- msaConvert(hemoAln, type="seqinr::alignment")
 ```
 
 ```{r hemealig, fig.height=3.5, fig.width=8, message=FALSE, warning=FALSE, fig.cap="Alignment of hemoglobin alpha-1 amino acid sequences from different species. Note that only positions 50-100 are shown in the example."}
@@ -92,7 +100,9 @@ options(ignore.negative.edge=TRUE)
 
 Finally, we can infer a phylogenetic tree based on the phylogenetic distance matrix using a [neighbor-joining algorithm](https://en.wikipedia.org/wiki/Neighbor_joining):
 
-```{r out.width='100%', fig.cap="Neighbor-joining tree of different vertebrates based on hemoglobin ⍺1 sequences."}
+```{r d_tree, out.width='100%', fig.cap="Neighbor-joining tree of different vertebrates based on hemoglobin ⍺1 sequences."}
+library(ape)
+
 #Calculate neighbor-joining tree
 hemoTree <- ape::nj(d)
 #Designate an outgroup to root the tree
@@ -121,7 +131,7 @@ While basic approaches for inferring phylogenies are conceptually and computatio
 ```
 Thus, for just 20 taxa, there are more possible tree configurations than human cells (that is, all cells from all humans). The number of possible trees eclipses the number of atoms in the universe at just over 50 taxa (Figure \@ref(fig:numtree)).Today phylogenetic analyses routinely include hundreds and sometimes thousands of taxa in our effort to build a comprehensive tree of life; this requires extensive computational infrastructure and ever more refined algorithms.
 
-```{r numtree, echo=FALSE, fig.cap="Number of possible tree configurations as a function of the number of taxa in a data set, as clacylated by Equation (7.1)."}
+```{r numtree, echo=FALSE, warning = FALSE, message = FALSE, fig.cap="Number of possible tree configurations as a function of the number of taxa in a data set, as calculated by Equation (7.1)."}
 n <- 3:60
 trees <- sapply(n, howmanytrees)
 nt <- data.frame(n,trees)
@@ -267,7 +277,7 @@ Phylogenetic trees are encoded in a variety of file formats that can all be impo
 
 ```{r}
 #Import a phylogenetic tree in the Newick format
-test.tree <- phytools::read.newick("data/7_test_tree.nwk")
+test.tree <- phytools::read.newick("https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/7_test_tree.nwk")
 ```
 
 As always when you import data into R, successfully executing this code should generate an object called "test.tree" in your work space (top right panel in RStudio).
@@ -301,29 +311,29 @@ tree +
 
 Metadata is a set of data that gives additional information about other data. For phylogenies, metadata typically provides additional information about the taxa in a tree. Note that each metadataset needs to have a column called `label`, in which individual entries match the tip labels in the phylogenetic tree.
 
-The [metadata for the example](data/7_metadata.csv) tree used here can be imported using the `read.csv()` function that you are already familiar with. As you can see below, it provides information about the geographic distribution and dietary habits of each species in the phylogeny.
+The [metadata for the example](7_metadata.csv) tree used here can be imported using the `read.csv()` function that you are already familiar with. As you can see below, it provides information about the geographic distribution and dietary habits of each species in the phylogeny.
 
 ```{r}
-meta.data <- read.csv("data/7_metadata.csv")
+meta.data <- read.csv("https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/7_metadata.csv")
 head(meta.data)
 ```
 
 We can now use a version of the pipe operator called left-join (`%<+%`) to annotate the base tree generated above with information from the metadata. To do so, we add the base tree on the left side of the operator and the metadata with the additional geoms on the right side of the operator. For example, we can replace the original tip labels to display the dietary habit of each species instead:
 
 ```{r fig.height=6, fig.width=8}
-tree  %<+% meta.data + geom_tiplab(aes(label=diet), offset=0) + ggtree::xlim(NA,500)
+tree  %<+% meta.data + geom_tiplab(aes(label=diet), offset=0) + xlim(NA,500)
 ```
 
 Alternatively, we can plot the original tip labels in addition to the dietary habits. In this case, the `offset` argument is required to make sure labels are not printed on to of each other:
 
 ```{r fig.height=6, fig.width=8}
-tree  %<+% meta.data + geom_tiplab() + geom_tiplab(aes(label=diet), offset=240) + ggtree::xlim(NA,750)
+tree  %<+% meta.data + geom_tiplab() + geom_tiplab(aes(label=diet), offset=240) + xlim(NA,750)
 ```
 
 Finally, we can also color code the tips of the phylogeny based on an input variable using `geom_tippoint()`:
 
 ```{r fig.height=6, fig.width=8}
-tree  %<+% meta.data + geom_tiplab(offset=20) + geom_tiplab(aes(label=diet), offset=370) + ggtree::xlim(NA,900) + geom_tippoint(aes(color=origin), na.rm = TRUE)
+tree  %<+% meta.data + geom_tiplab(offset=20) + geom_tiplab(aes(label=diet), offset=370) + xlim(NA,900) + geom_tippoint(aes(color=origin), na.rm = TRUE)
 ```
 
 If you are interested in learning more about phylogenetic tree annotation using `ggtree`, I recommend Part II in Guangchuang Yu's book "[Data Integration, Manipulation and Visualization of Phylogenetic Trees](https://yulab-smu.top/treedata-book/index.html)".
