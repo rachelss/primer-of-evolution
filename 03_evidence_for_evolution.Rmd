@@ -285,15 +285,17 @@ knitr::include_graphics('images/daphne_major.jpg')
 knitr::include_graphics('images/Geospiza_fortis.jpg')
 ```
 
-## Practical Skills: Plotting with ggplot
+## Plotting as the basis for understanding relationships in data
 
-### R Basics
+### Importing Data {#import-data}
 
-In the [last chapter](what-evolution-is.html#r), you learned how to enter commands in the RStudio console to receive an output from R. This showed you the general principle of how you can prompt R to execute any function you want.
+In the [last chapter](what-evolution-is.html#r), you learned how to enter commands in the RStudio console to receive an output from R. This showed you the general principle of how you can prompt R to execute a function to analyze data.
 
 #### Loading Libraries {.unnumbered}
 
-To make use of installed libraries, you also need to load the libraries *every time* you use R (*i.e.*, every time you restart the program). You can do this with the `library()` command. The following code chunk loads the `tidyverse` library with most of the basic functions you will need for plotting and data manipulation:
+Much like you can install apps on your phone to provide additional functionality, 
+you can use libraries in R to add additional tools.
+To make use of installed libraries, you need to load the libraries *every time* you use R (*i.e.*, every time you restart the program). You can do this with the `library()` command. The following code chunk loads the `tidyverse` library with most of the basic functions you will need for plotting and data manipulation:
 
 ```{r lib, warning=FALSE, message=FALSE}
 #Note that loading a library does not lead to an output
@@ -310,13 +312,13 @@ You have to re-load your libraries every time you restart RStudio. The most comm
 This means that the function name is either misspelled, or the library containing a particular function has not been loaded (so R does not actually understand the command you are entering).
 :::
 
-### Importing Data {#import-data}
+#### Reading a \*.csv File {.unnumbered}
 
 For most R exercises, you will work with real data sets that illuminate evolutionary concepts. Data sets will typically be provided as \*.csv files (which stands for comma-separated values). \*.csv files are essentially text files containing data tables, and you can also open these in any text editor or Excel. If you do so, you will see a data structure familiar from regular spreadsheets: different variables are organized in columns, and observations are organized in rows.
 
-#### Reading a \*.csv File {.unnumbered}
-
-To import data in the form of \*.csv files, you can use R's `read_csv()` function. In the code chunk below, you can import a simple test data set [test_data.csv](data/test_data.csv) provided with this textbook that includes three variables: sex, length, and mass of individuals in a population.
+To import data in the form of \*.csv files, you can use the `read_csv()` function. Using the code chunk below, you can import a simple test data set [test_data.csv](data/test_data.csv) provided with this textbook that includes three variables: sex, length, and mass of individuals in a population.
+We will use this dataset to examine how length and mass are related in some animals,
+as well as how size is related to sex.
 
 ```{r readcsv, echo = FALSE}
 #The line of code simply prompts the computer to read the "test_data.csv" file and generate a data.frame called test_data
@@ -325,18 +327,21 @@ test_data <- read_csv('data/test_data.csv')
 
 ```{r readcsv2, eval = FALSE}
 #The line of code simply prompts the computer to read the "test_data.csv" file and generate a data.frame called test_data
-test_data <- read_csv('https://raw.githubusercontent.com/rachelss/primer-of-evolution/main/data/test_data.csv')
+test_data <- read_csv('https://tinyurl.com/primerevotestdata')
 ```
 
 If this worked correctly, you should now see a new data frame called `test_data` in your work space (Global Environment; top right panel). You can double click it to view it or execute `View(test_data)` in the console as described on [Chapter 1](what-evolution-is.html#data-frame). There should be three columns: sex, length, and mass.
 
 ### Graphing Data
 
-A key learning objective of this course is that you learn to visualize and interpret data to address different evolutionary hypotheses. In the following sections, I will explain step by step (that is code line by code line) how to make a simple graph with our test data. Let's aim to make a scatter plot showing the relationship between length and mass of individuals in the population. The process is not much different than sketching a graph by hand and layering different parts of the graph on top of each other, just that you use words (code) to make the computer draw. To graph data, we will primarily use the `ggplot()` function that comes with the `ggplot2` library, which is packaged in the `tidyverse`.
+A key learning objective of this course is that you learn to visualize and interpret data to address different evolutionary hypotheses. 
+To understand if there is a relationship between length and mass of individuals in the population
+we can use a scatter plot. The process of constructing a graph in R is not much different than sketching a graph by hand and layering different parts of the graph on top of each other, except that you use words (code) to make the computer draw the graph. To graph data, we will primarily use the `ggplot()` function that comes with the `ggplot2` library, which is packaged in the `tidyverse`.
 
 #### Defining the Axes and Coordinate System {.unnumbered}
 
 The first step of making any graph is to define the axes and establish the coordinate grid that allows for the plotting of the data. To do this, R first needs to know what data frame the data is stored in (in our case, the data frame is called `test.data`). The axes are then defined by specifying the aesthetics `aes()` within the `ggplot` function, as shown below.
+In this case we are using the graph to examine if mass is related to length in our samples.
 
 ```{r coord}
 #This line of code calls for the ggplot function (a plotting function) and makes a grid based on the test.data data frame, using length as the x axis and mass as the y axis
@@ -347,7 +352,7 @@ The output is a simple coordinate system based on the data we provided, with len
 
 #### Adding a Layer with Data Points {.unnumbered}
 
-The second step is to draw the actual data into the established coordinate system. To do so, you just need to tell the program what kind of graph you want to draw. Different graph types in ggplot are referred to as geoms (geometries), and a scatter plot is designated as `geom_point()`. You can add that to your existing code describing the coordinate system with a plus sign.
+The second step is to draw the actual data into the established coordinate system. To do so, you need to tell the program what kind of graph you want to draw. Different graph types in ggplot are referred to as geoms (geometries), and a scatter plot is designated as `geom_point()`. You can add that to your existing code describing the coordinate system with a plus sign.
 
 ```{r points}
 ggplot(test_data, aes(x=length, y=mass)) +
@@ -386,7 +391,8 @@ While there appears to be a relationship between length and mass, we cannot say 
 
 #### Adding Additional Complexity {.unnumbered}
 
-If you look at the data frame, you will see that we do not only have information about the length and mass of individuals in the population, but also their sex. So, we may want to account for potential sex differences in the relationship between length and mass. To do so, we can color-code individual points based on the sex of the individual by adding another term of the aesthetics of the `ggplot()` function (`color=sex`):
+If you look at the data frame, you will see that we do not only have information about the length and mass of individuals in the population, but also their sex. 
+Based on experience we may hypothesize that we should account for potential sex differences in the relationship between length and mass. To do so, we can color-code individual points based on the sex of the individual by adding another term of the aesthetics of the `ggplot()` function (`color=sex`):
 
 ```{r groups, message=FALSE}
 ggplot(test_data, aes(x=length, y=mass, color=sex)) +
@@ -396,11 +402,14 @@ ggplot(test_data, aes(x=length, y=mass, color=sex)) +
   ylab("Body mass in kg")
 ```
 
-As you can see, this not only changes the color of individual points, but it also draws a separate regression line for males and females. If you want to change the legend title, you can do this again with the `labs()` function: `labs(x="Body length in cm", y="Body mass in kg", color="Sex")` .
+As you can see, this not only changes the color of individual points, but it also draws separate regression lines for males and females. If you want to change the legend title, you can do this again with the `labs()` function: `labs(x="Body length in cm", y="Body mass in kg", color="Sex")` .
 
 #### Changing to a Colorblind-Friendly Palette {.unnumbered}
 
-ggplot uses a default color palette when you add color to a graph. You may not like that default color scheme, or---if you have impaired color perception---you may find it difficult to distinguish some of the default colors. One simple way of changing the color palette of your graph is to add viridis coloration to your plot. 
+ggplot uses a default color palette when you add color to a graph. 
+Because some people have impaired color perception it's important to present your data
+in a way that is accessible to all.
+A simple way of changing the color palette of your graph is to add viridis coloration to your plot. 
 
 To change the color scheme of the graph generated with the `ggplot()`, you can simply use the `+ scale_colour_viridis_d()` function to designate the desired palette:
 
@@ -417,7 +426,10 @@ Note the `d` at the end of the function stands for discrete as you have two disc
 
 #### Generating and Visualizing Aggregate Data {.unnumbered}
 
-In the exercise associated with this chapter, you will not be plotting data from individuals but rather aggregate data that is compiled from many individuals and provides a mean and a measurement of variation around a mean for different sampling groups. To show you how we can visualize such data as mean (± variation), we need to first calculate the mean and standard deviation (sd) of length separate for each sex based on the data above.
+In the exercise associated with this chapter, you will not be plotting data from individuals but rather aggregate data that is compiled from many individuals.
+You can then compare the means for different sampling groups
+using the variation among samples for each group to determine whether they are different. 
+To show you how we can visualize means and variation, we will calculate these values for each group (sex) in our data.
 
 To do this, we will use the `group_by` and `summarize` functions to create a new variable where each subset of data is labeled. First, tell `group_by` the name of the data you want to divide into subsets, followed by the columns you want to include.
 
@@ -426,31 +438,44 @@ To do this, we will use the `group_by` and `summarize` functions to create a new
 grouped_test_data <- group_by(test_data, sex)
 ```
 
-Next we calculate the mean and sd for each group, and put this into a new variable.
+Next we calculate the mean, standard deviation (sd), and standard error (se) for each group, and put these into new variables.
 The name of the column containing the mean (calculated using the function `mean`) is "mean".
 The name of the column containing the sd (calculated using the function `sd`) is "sd".
+The name of the column containing the se (calculated by dividing sd by the square root of the sample size (n)) is "se" (note that n() is a function because it's calculating the sample size).
+
+The standard deviation is a representation of the amount of variation in the data.
+The mean plus/minus 2sd contains approximately 95% of the data for the sample.
+The standard error is an estimate of the accuracy of the estimate of the mean. 
+The function to calculate the standard error includes both variation (sd) and the size of the sample.
+That means that as you increase the sample size the estimate of the mean gets more precise,
+even though the amount of variation in your sample (sd) may stay the same.
+The mean plus/minus 2se is the 95% confidence interval for the estimate of the mean.
+That means that we expect the actual estimate of the mean falls within this range.
+When you are comparing means from two samples as we do here, it's important to compare the two confidence intervals not the means themselves. 
 
 
 ```{r sm}
-summary_test_data <- summarise(grouped_test_data,mean=mean(length),sd=sd(length))
+summary_test_data <- summarise(grouped_test_data, mean=mean(length), sd=sd(length), se = sd(length)/sqrt(n()))
 
 ```
 
 Click on the variable in your Environment to view your new summary table.
 
-To visualize means and standard deviations, we can again use the `ggplot()` function with sex on the x axis and the mean value of length on the y axis (note that we are now referring to the `summary_test_data` data frame that we just created). As before, we are using `geom_point()` to draw our data as points. In addition, we are using `geom_errorbar()` to draw the standard deviations around the mean in both directions. You already know all the other code elements from above.
+```{r s_table}
+summary_test_data
+```
+
+To visualize the means and confidence intervals (+/- 2SE), we can again use the `ggplot()` function with sex on the x axis and the mean value of length on the y axis (note that we are now referring to the `summary_test_data` data frame that we just created). As before, we are using `geom_point()` to draw our data as points. In addition, we are using `geom_errorbar()` to draw the standard deviations around the mean in both directions. You already know all the other code elements from above.
 
 ```{r meanplot}
 ggplot(summary_test_data, aes(x=sex, y=mean)) +
   geom_point() +
-  geom_errorbar(aes(ymin=mean-sd, ymax=mean+sd), width=0.1)  +  #width designates the width of the horizontal bars
+  geom_errorbar(aes(ymin=mean-sd, ymax=mean+se), width=0.1)  +  #width designates the width of the horizontal bars
   xlab("Sex") +
   ylab("Mean length [mm]")
 ```
 
 You can't say whether the mean values for male and female length are different from the graph alone.
-Obviously, the mean values are not equal, but whether they are significantly different depends on the variation in the samples as well as the number of samples.
-We observe that the error bars overlap, but that doesn't mean that the mean values are or are not different.
 To determine whether the mean values are different we need to use a statistical analysis.
 When we have two categories of data we can use a t-test with the `t.test` function in R.
 The null hypothesis is that the two means are equal, and the alternative is that they are not.
@@ -475,7 +500,12 @@ Now we can compare the `length` columns of these two datasets.
 t.test(female_test_data$length, male_test_data$length)
 ```
 
-What do you conclude about whether males and females differ?
+The simplest way to interpret the output of the t test is to focus on the p-value.
+If the p-value is less than a typical alpha value of 0.05 we will reject the null hypothesis
+that the mean values are the same. 
+We define our alpha value as the value at which we are willing to reject the null hypothesis if it is true.
+
+**Make a statement about your null hypothesis and your conclusion about whether males and females differ in length.**
 
 ## Case study: Darwin's Finches
 

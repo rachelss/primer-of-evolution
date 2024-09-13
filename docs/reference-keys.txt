@@ -284,8 +284,7 @@ deep-time
 tiktaalik
 absence-of-evidence
 case-study-darwins-finches
-practical-skills-plotting-with-ggplot
-r-basics
+plotting-as-the-basis-for-understanding-relationships-in-data
 import-data
 graphing-data
 case-study-darwins-finches-1

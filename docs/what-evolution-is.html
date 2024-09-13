@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 1 What Evolution Is | A Primer of Evolution</title>
   <meta name="description" content="An Introduction to Evolutionary Thought: Theory, Evidence, and Practice" />
-  <meta name="generator" content="bookdown 0.35 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.40 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 1 What Evolution Is | A Primer of Evolution" />
   <meta property="og:type" content="book" />
@@ -75,7 +75,7 @@
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -227,11 +227,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.6" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#tiktaalik"><i class="fa fa-check"></i><b>2.6</b> Correspondence of Different Lines of Evidence</a></li>
 <li class="chapter" data-level="2.7" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#absence-of-evidence"><i class="fa fa-check"></i><b>2.7</b> Absence of Evidence…</a></li>
 <li class="chapter" data-level="2.8" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#case-study-darwins-finches"><i class="fa fa-check"></i><b>2.8</b> Case Study: Darwin’s Finches</a></li>
-<li class="chapter" data-level="2.9" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#practical-skills-plotting-with-ggplot"><i class="fa fa-check"></i><b>2.9</b> Practical Skills: Plotting with ggplot</a>
+<li class="chapter" data-level="2.9" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#plotting-as-the-basis-for-understanding-relationships-in-data"><i class="fa fa-check"></i><b>2.9</b> Plotting as the basis for understanding relationships in data</a>
 <ul>
-<li class="chapter" data-level="2.9.1" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#r-basics"><i class="fa fa-check"></i><b>2.9.1</b> R Basics</a></li>
-<li class="chapter" data-level="2.9.2" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#import-data"><i class="fa fa-check"></i><b>2.9.2</b> Importing Data</a></li>
-<li class="chapter" data-level="2.9.3" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#graphing-data"><i class="fa fa-check"></i><b>2.9.3</b> Graphing Data</a></li>
+<li class="chapter" data-level="2.9.1" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#import-data"><i class="fa fa-check"></i><b>2.9.1</b> Importing Data</a></li>
+<li class="chapter" data-level="2.9.2" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#graphing-data"><i class="fa fa-check"></i><b>2.9.2</b> Graphing Data</a></li>
 </ul></li>
 <li class="chapter" data-level="2.10" data-path="evidence-for-evolution.html"><a href="evidence-for-evolution.html#case-study-darwins-finches-1"><i class="fa fa-check"></i><b>2.10</b> Case study: Darwin’s Finches</a>
 <ul>
@@ -708,7 +707,7 @@ Figure 1.3: Examples of Darwin’s finches or Galapagos finches. Note the stark 
 <h4>The Console and Basic R Prompts<a href="what-evolution-is.html#the-console-and-basic-r-prompts" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Let’s begin with the fundamental building blocks of R and RStudio. As you open RStudio, the program window will look something like <a href="#Fig1.4">Figure 1.4</a>.The panel in the upper right contains your work space (Global Environment) as well as a history of the commands that you’ve previously entered. Any plots that you generate will show up in the panel in the lower right corner and you can also use that section to browse your folders for specific files. The panel on the left is where the action happens. It’s called the Console. Every time you launch RStudio, it will have the same text at the top of the console telling you the version of R that you’re running. Below that information is the command prompt (symbolized by <code>&gt;</code>), where you can enter commands and R responds to those commands.</p>
 <p>It’s really simple, and you can try it out right now! Just type <code>2+2</code>, press enter, and R should respond right back with the response. It should look like this:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="what-evolution-is.html#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="what-evolution-is.html#cb1-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">+</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
 <p>You will notice if you type a lot the information gradually scrolls off the screen.
 It’s helpful to be able to go back and reference prior work.
@@ -723,60 +722,60 @@ It’s also helpful to generally stay organized as we’ll have multiple project
 </ul>
 <p>As you have already seen,
 R can operate like a calculator and can perform any calculation you might need. R can also deal with logical variables, and respond to queries about whether logic statements are true or false. For example, you can use logical operators [<code>&gt;</code> (greater than), <code>&lt;</code> (smaller than), <code>==</code> (equals), <code>!=</code> (not-equals)] to contrast statements, and R will assess them:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="what-evolution-is.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">*</span><span class="dv">2</span><span class="sc">&gt;</span><span class="dv">100</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="what-evolution-is.html#cb3-1" tabindex="-1"></a><span class="dv">5</span><span class="sc">*</span><span class="dv">2</span><span class="sc">&gt;</span><span class="dv">100</span></span></code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="what-evolution-is.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span><span class="sc">*</span><span class="dv">2</span><span class="sc">==</span><span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="what-evolution-is.html#cb5-1" tabindex="-1"></a><span class="dv">5</span><span class="sc">*</span><span class="dv">2</span><span class="sc">==</span><span class="dv">10</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 <div id="working-with-variables" class="section level4 unnumbered hasAnchor">
 <h4>Working with Variables<a href="what-evolution-is.html#working-with-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>One of the strengths of R is that it cannot only perform basic calculations using numbers, but it can handle variables, which are symbols that stand for values. You can designate a variable using <code>&lt;-</code>. For example, we can assign the value 5 to x:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="what-evolution-is.html#cb7-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="what-evolution-is.html#cb7-1" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">5</span></span></code></pre></div>
 <p>Notice when you run that code, you created a new variable x with the value 5 that shows up in your Environment on the top-right panel. Once you have a variable defined, you can use it in calculations and logic statements as described above:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="what-evolution-is.html#cb8-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="what-evolution-is.html#cb8-1" tabindex="-1"></a>x<span class="sc">^</span><span class="dv">2</span></span></code></pre></div>
 <pre><code>## [1] 25</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="what-evolution-is.html#cb10-1" aria-hidden="true" tabindex="-1"></a>x<span class="sc">==</span><span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="what-evolution-is.html#cb10-1" tabindex="-1"></a>x<span class="sc">==</span><span class="dv">5</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p>Designating variables allows you to write some complex code that processes data, and if you want to do the same thing with different data, you don’t have to rewrite the code, you just redefine the input variables. For example you can designate three different variables:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="what-evolution-is.html#cb12-1" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="dv">16</span></span>
-<span id="cb12-2"><a href="what-evolution-is.html#cb12-2" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="dv">12</span></span>
-<span id="cb12-3"><a href="what-evolution-is.html#cb12-3" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">=</span> <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="what-evolution-is.html#cb12-1" tabindex="-1"></a>x1 <span class="ot">=</span> <span class="dv">16</span></span>
+<span id="cb12-2"><a href="what-evolution-is.html#cb12-2" tabindex="-1"></a>x2 <span class="ot">=</span> <span class="dv">12</span></span>
+<span id="cb12-3"><a href="what-evolution-is.html#cb12-3" tabindex="-1"></a>x3 <span class="ot">=</span> <span class="dv">2</span></span></code></pre></div>
 <p>If you use these variables in a complex equation, you need to just write the equation once, and you can tweak the input variables to explore the effects of different values.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="what-evolution-is.html#cb13-1" aria-hidden="true" tabindex="-1"></a>x1<span class="sc">*</span>(x1<span class="sc">+</span>x2<span class="sc">+</span>x3)</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="what-evolution-is.html#cb13-1" tabindex="-1"></a>x1<span class="sc">*</span>(x1<span class="sc">+</span>x2<span class="sc">+</span>x3)</span></code></pre></div>
 <pre><code>## [1] 480</code></pre>
 </div>
 <div id="vectors" class="section level4 unnumbered hasAnchor">
 <h4>Vectors<a href="what-evolution-is.html#vectors" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Variables are not only able to designate numbers, they can also designate lists of numbers (called vectors). You can create a vector (<code>y</code> in this case) using the <code>c()</code> function, and you can then call on <code>y</code> using <code>print()</code> for R to display the vector in the console:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="what-evolution-is.html#cb15-1" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">12</span>,<span class="dv">2</span>,<span class="dv">14</span>)</span>
-<span id="cb15-2"><a href="what-evolution-is.html#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="what-evolution-is.html#cb15-1" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">12</span>,<span class="dv">2</span>,<span class="dv">14</span>)</span>
+<span id="cb15-2"><a href="what-evolution-is.html#cb15-2" tabindex="-1"></a><span class="fu">print</span>(y)</span></code></pre></div>
 <pre><code>## [1]  1 12  2 14</code></pre>
 <p>If you execute this code, you will again see the creation of a new variable y in your work space, which corresponds to a vector with four numbers.</p>
 <p>You can call numbers within a particular vector by using square brackets along with the variable name and a the number that refers to a location within the vectors. So, if we want to extract the 3<sup>rd</sup> number in our vector <code>y</code>, we simply type:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="what-evolution-is.html#cb17-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="what-evolution-is.html#cb17-1" tabindex="-1"></a>y[<span class="dv">3</span>]</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p>We can also extract a range of values by using a colon. Let’s say you want to extract the last two numbers in our vector:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="what-evolution-is.html#cb19-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="what-evolution-is.html#cb19-1" tabindex="-1"></a>y[<span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>]</span></code></pre></div>
 <pre><code>## [1]  2 14</code></pre>
 <p>Finally, you can modify specific values within a vector by just combining some of the code you have already learned so far. For example, you can change the second value in our vector <code>y</code> from a 12 to 4:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="what-evolution-is.html#cb21-1" aria-hidden="true" tabindex="-1"></a>y[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">4</span></span>
-<span id="cb21-2"><a href="what-evolution-is.html#cb21-2" aria-hidden="true" tabindex="-1"></a>y</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="what-evolution-is.html#cb21-1" tabindex="-1"></a>y[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">4</span></span>
+<span id="cb21-2"><a href="what-evolution-is.html#cb21-2" tabindex="-1"></a>y</span></code></pre></div>
 <pre><code>## [1]  1  4  2 14</code></pre>
 </div>
 <div id="using-functions" class="section level4 unnumbered hasAnchor">
 <h4>Using Functions<a href="what-evolution-is.html#using-functions" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>R can execute a wide variety of functions that take some input and provide an output based on the input. Functions can be applied to a simple number. For example the <code>sqrt()</code> function calculates the square-root of an input number. We can use it on our variable x that we defined above:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="what-evolution-is.html#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="what-evolution-is.html#cb23-1" tabindex="-1"></a><span class="fu">sqrt</span>(x)</span></code></pre></div>
 <pre><code>## [1] 2.236068</code></pre>
 <p>Note that if <code>x</code> was a list of numbers (referred to as a vector), the function is applied to every number in the vector.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="what-evolution-is.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sqrt</span>(y)</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="what-evolution-is.html#cb25-1" tabindex="-1"></a><span class="fu">sqrt</span>(y)</span></code></pre></div>
 <pre><code>## [1] 1.000000 2.000000 1.414214 3.741657</code></pre>
 <p>Sometimes we want to use the output of one function as an input for another function. In this case, it makes sense to store the output of a function in a new object:</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="what-evolution-is.html#cb27-1" aria-hidden="true" tabindex="-1"></a>sqrt_y <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(y)</span>
-<span id="cb27-2"><a href="what-evolution-is.html#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sqrt_y)</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="what-evolution-is.html#cb27-1" tabindex="-1"></a>sqrt_y <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(y)</span>
+<span id="cb27-2"><a href="what-evolution-is.html#cb27-2" tabindex="-1"></a><span class="fu">print</span>(sqrt_y)</span></code></pre></div>
 <pre><code>## [1] 1.000000 2.000000 1.414214 3.741657</code></pre>
 <p>Note that this code again created a new object called <code>sqrt_y</code> in your work space, and you can call on it using <code>print()</code> to display it in the console. We can now also use the new values as input for another function. For example, we can calculate the average of these values using the <code>mean()</code> function:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="what-evolution-is.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(sqrt_y)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="what-evolution-is.html#cb29-1" tabindex="-1"></a><span class="fu">mean</span>(sqrt_y)</span></code></pre></div>
 <pre><code>## [1] 2.038968</code></pre>
 <p>Over the course of the semester, you will get to know a wide variety of functions in R that will allow you to make complex plots and analyze genetic and phenotypic data to make evolutionary inferences. R already knows a large number of functions upon installation, but you can essentially teach it limitless new functions by installing so-called libraries (or packages). There are <a href="https://cran.r-project.org/web/packages/available_packages_by_name.html">thousands of libraries for R</a>, and they contain functions to analyze and visualize all kinds of biological data, from the structure of genomes to the composition of ecological communities.</p>
 </div>
@@ -784,14 +783,14 @@ R can operate like a calculator and can perform any calculation you might need. 
 <h4>Data Frames<a href="what-evolution-is.html#data-frames" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The reality in biology is that we rarely deal with simple numbers or vectors. Rather, we typically collect complex data sets that contain a multitude of variables. For example, if we go out into natural populations to quantify trait variation, you might record information about an individual’s sex, its health status, body size, and body mass. Instead of having a different variable designated for each of these pieces of information, we can combine all of the variables into a single object (table) called a data frame.</p>
 <p>To assemble a data frame, we start by first defining individual variables. In the example below, I create two vectors with categorical variables (<code>sex</code> and <code>health.status</code>; note that different categories need to be contained in quotation marks), and two continuous variables (<code>body.size</code> and <code>body.mass</code>):</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="what-evolution-is.html#cb31-1" aria-hidden="true" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>)</span>
-<span id="cb31-2"><a href="what-evolution-is.html#cb31-2" aria-hidden="true" tabindex="-1"></a>health.status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;healthy&quot;</span>, <span class="st">&quot;healthy&quot;</span>, <span class="st">&quot;sick&quot;</span>, <span class="st">&quot;sick&quot;</span>)</span>
-<span id="cb31-3"><a href="what-evolution-is.html#cb31-3" aria-hidden="true" tabindex="-1"></a>body.size <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">16.4</span>, <span class="fl">12.2</span>, <span class="fl">10.2</span>, <span class="fl">8.9</span>)</span>
-<span id="cb31-4"><a href="what-evolution-is.html#cb31-4" aria-hidden="true" tabindex="-1"></a>body.mass <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">221</span>, <span class="dv">199</span>, <span class="dv">178</span>, <span class="dv">159</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="what-evolution-is.html#cb31-1" tabindex="-1"></a>sex <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>, <span class="st">&quot;male&quot;</span>, <span class="st">&quot;female&quot;</span>)</span>
+<span id="cb31-2"><a href="what-evolution-is.html#cb31-2" tabindex="-1"></a>health.status <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;healthy&quot;</span>, <span class="st">&quot;healthy&quot;</span>, <span class="st">&quot;sick&quot;</span>, <span class="st">&quot;sick&quot;</span>)</span>
+<span id="cb31-3"><a href="what-evolution-is.html#cb31-3" tabindex="-1"></a>body.size <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">16.4</span>, <span class="fl">12.2</span>, <span class="fl">10.2</span>, <span class="fl">8.9</span>)</span>
+<span id="cb31-4"><a href="what-evolution-is.html#cb31-4" tabindex="-1"></a>body.mass <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">221</span>, <span class="dv">199</span>, <span class="dv">178</span>, <span class="dv">159</span>)</span></code></pre></div>
 <p>As before, executing this code will generate four different vectors in your work space. To combine all the information into a single data frame, we can use R’s <code>data.frame()</code> function. Within the data frame, you can generate a variable name (before <code>=</code>) and assign a vector that you already created (after <code>=</code>):</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="what-evolution-is.html#cb32-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sex=</span>sex, <span class="at">health=</span>health.status, <span class="at">size=</span>body.size, <span class="at">mass=</span>body.mass)</span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="what-evolution-is.html#cb32-1" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">sex=</span>sex, <span class="at">health=</span>health.status, <span class="at">size=</span>body.size, <span class="at">mass=</span>body.mass)</span></code></pre></div>
 <p>Executing this code will again generate a new object in your work space. You can view your data frame by double-clicking on it in the workspace or using the <code>View()</code> function in the console:</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb33-1"><a href="what-evolution-is.html#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="dt">View</span>(df)</span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode ruby"><code class="sourceCode ruby"><span id="cb33-1"><a href="what-evolution-is.html#cb33-1" tabindex="-1"></a><span class="dt">View</span>(df)</span></code></pre></div>
 <p>The data frame should look similar to a spreadsheet you might know from Excel (Figure <a href="what-evolution-is.html#fig:df1">1.4</a>):</p>
 <div class="figure" style="text-align: center"><span style="display:block;" id="fig:df1"></span>
 <img src="images/dataframe.png" alt="A view of the df data frame generated by the `View()` function." width="50%" />
@@ -800,7 +799,7 @@ Figure 1.4: A view of the df data frame generated by the <code>View()</code> fun
 </p>
 </div>
 <p>Each of the columns in the data frame contains one of the variables, with the name that we gave it when we created the data frame. We can access each of those columns using the <code>$</code> operator. For example, if we wanted to access the size variable, we would combine the name of the data frame with the name of the variable as follows:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="what-evolution-is.html#cb34-1" aria-hidden="true" tabindex="-1"></a>df<span class="sc">$</span>size</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="what-evolution-is.html#cb34-1" tabindex="-1"></a>df<span class="sc">$</span>size</span></code></pre></div>
 <pre><code>## [1] 16.4 12.2 10.2  8.9</code></pre>
 </div>
 <div id="help-functions" class="section level4 unnumbered hasAnchor">
