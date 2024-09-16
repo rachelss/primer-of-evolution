@@ -287,6 +287,102 @@ knitr::include_graphics('images/Geospiza_fortis.jpg')
 
 ## Plotting as the basis for understanding relationships in data
 
+During this course, you will learn about evolution *and* practice being a scientist by visualizing and interpreting data on a weekly basis. To do so, we will use an open-source software called R. This section provides instructions for accessing R using URI's RStudio web server.
+
+### What are R and RStudio?
+
+R is a programming language for statistical analysis and data visualization, and over the past decades, it has become one of the most critical and universally used tools in the life sciences. RStudio is a convenient interface that allows you to easily write, organize, and execute your R code; it's the program we will use throughout the semester for weekly assignments. 
+
+### Accessing RStudio
+
+* Go to [https://rstudio.uri.edu/](https://rstudio.uri.edu/)
+* Log in using your URI email address minus the `@uri.edu`
+* Use your student id number as your password
+
+### Some R and RStudio Basics
+
+This section was inspired by and used parts of "[Introduction to R](https://chem.libretexts.org/@go/page/7641)" by [Russell A. Poldrack](https://poldracklab.stanford.edu/), published on [LibreTexts](https://libretexts.org/) and licensed under [CC BY-NC](https://creativecommons.org/licenses/by-nc/4.0/).
+
+Learning a programming language---like learning any language---can be intimidating. However, it is a basic skill for any scientist. 
+In this book, you will work through R exercises that help you digest the basic concepts discussed in each chapter. We will show you how to use R to work through the exercises. Assignments in class will provide you with the code to produce a desired outcome, which you will then reinforce with exercises outside of class. We encourage you to explore beyond what the exercises dictate. A willingness to experiment will make you a better programmer and scientist. 
+
+#### The Console and Basic R Prompts {.unnumbered}
+
+Let's begin with the fundamental building blocks of R and RStudio. As you open RStudio, the program window will look something like [Figure 1.4](#Fig1.4).The panel in the upper right contains your work space (Global Environment) as well as a history of the commands that you've previously entered. Any plots that you generate will show up in the panel in the lower right corner and you can also use that section to browse your folders for specific files. The panel on the left is where the action happens. It's called the Console. Every time you launch RStudio, it will have the same text at the top of the console telling you the version of R that you're running. Below that information is the command prompt (symbolized by `>`), where any commands you run will produce output.
+
+Let’s start by getting organized. Because RStudio provides a mechanism for setting up projects we will use this to stay organized. 
+
+* In the RStudio File menu select New Project - New Directory - New Project.
+* Give the project a name (e.g. BasicGraphs). For this and all future work ensure that names never include spaces.
+* Create Project. By creating a new project you have created a folder for your work. When using projects whenever you come back to this project you will return to the same setup. This allows you to switch projects with different folders and open files.
+* From the File menu select New File - R script to show a fourth pane in the upper left corner.
+* Save your script (it will be saved automatically in your project folder). Now, when you type in this script all your code will stay here. From now on type your code in your script and click the `Run` button to run it.
+
+#### Working with Variables {.unnumbered}
+
+When you load data into R it stores it as a variable. Variables are symbols that stand for values. You can designate a variable using `<-`. For example, we can assign the value 5 to x:
+
+```{r basic3}
+x <- 5
+```
+
+Notice when you run that code, you created a new variable x with the value 5 that shows up in your Environment on the top-right panel. Once you have a variable defined, you can use it in calculations.
+For example, this code calculates x squared.
+
+```{r basic4}
+x^2
+```
+
+You can also evaluate information about the variable. The logic statement below asks whether x is equal to 5 (note the double equals). This statement should return True.
+
+
+```{r basic5}
+x==5
+```
+
+#### Vectors {.unnumbered}
+
+Variables are not only able to designate numbers, they can also designate lists of numbers (called vectors). You can create a vector (`y` in this case) using the `c()` function, and you can then call on `y` to display the vector in the console:
+
+```{r basic8}
+y <- c(1,12,2,14)
+```
+
+If you execute this code, you will again see the creation of a new variable y in your work space, which corresponds to a vector with four numbers.
+
+#### Using Functions {.unnumbered}
+
+R can execute a wide variety of functions that take some input and provide an output based on the input. Functions can be applied to a simple number. For example the `sqrt()` function calculates the square-root of an input number. We can use it on our variable x that we defined above:
+
+```{r basic12}
+sqrt(x)
+```
+
+Note that if `x` was a list of numbers (referred to as a vector), the function is applied to every number in the vector.
+
+```{r basic13}
+sqrt(y)
+```
+
+Sometimes we want to use the output of one function as an input for another function. In this case, it makes sense to store the output of a function in a new object:
+
+```{r basic14}
+sqrt_y <- sqrt(y)
+sqrt_y
+```
+
+Note that this code again created a new object called `sqrt_y` in your work space, and you can call on it to display it in the console. We can now also use the new values as input for another function. For example, we can calculate the average of these values using the `mean()` function:
+
+```{r basic15}
+mean(sqrt_y)
+```
+
+Over the course of the semester, you will get to know a wide variety of functions in R that will allow you to make complex plots and analyze genetic and phenotypic data to make evolutionary inferences. R already knows a large number of functions upon installation, but you can essentially teach it limitless new functions by installing so-called libraries (or packages). There are [thousands of libraries for R](https://cran.r-project.org/web/packages/available_packages_by_name.html), and they contain functions to analyze and visualize all kinds of biological data, from the structure of genomes to the composition of ecological communities.
+
+#### Help Functions {.unnumbered}
+
+If you ever run into issues or have question regarding how to use a particular function or package, you can access the documentation with instruction using the question mark symbol (`?`) followed by the function or package name. For example, `?sqrt` will provide the instructions for the `sqrt()` function.
+
 ### Importing Data {#import-data}
 
 In the [last chapter](what-evolution-is.html#r), you learned how to enter commands in the RStudio console to receive an output from R. This showed you the general principle of how you can prompt R to execute a function to analyze data.
@@ -311,6 +407,10 @@ You have to re-load your libraries every time you restart RStudio. The most comm
 
 This means that the function name is either misspelled, or the library containing a particular function has not been loaded (so R does not actually understand the command you are entering).
 :::
+
+#### Data Frames {.unnumbered}
+
+The reality in biology is that we rarely deal with simple numbers or vectors. Rather, we typically collect complex data sets that contain a multitude of variables. For example, if we go out into natural populations to quantify trait variation, you might record information about an individual's sex, its health status, body size, and body mass. Instead of having a different variable designated for each of these pieces of information, we can combine all of the variables into a single object (table) called a data frame.
 
 #### Reading a \*.csv File {.unnumbered}
 
