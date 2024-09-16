@@ -454,8 +454,13 @@ That means that we expect the actual estimate of the mean falls within this rang
 When you are comparing means from two samples as we do here, it's important to compare the two confidence intervals not the means themselves. 
 
 
-```{r sm}
+```{r sm, echo=FALSE}
+#for some reason needs dplyr to run correctly in rmd
 summary_test_data <- dplyr::summarise(grouped_test_data, mean=mean(length), sd=sd(length), se=sd(length)/sqrt(n()))
+```
+
+```{r sm_alt, echo=TRUE, eval=FALSE}
+summary_test_data <- summarise(grouped_test_data, mean=mean(length), sd=sd(length), se=sd(length)/sqrt(n()))
 ```
 
 Click on the variable in your Environment to view your new summary table.
