@@ -957,7 +957,7 @@ To make use of installed libraries, you need to load the libraries <em>every tim
 We will use this dataset to examine how length and mass are related in some animals,
 as well as how size is related to sex.</p>
 <pre><code>## Rows: 60 Columns: 3
-## ── Column specification ───────────────────────────────────────────────────────────────────────────────────────
+## ── Column specification ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
 ## Delimiter: &quot;,&quot;
 ## chr (1): sex
 ## dbl (2): length, mass
@@ -1047,7 +1047,7 @@ A simple way of changing the color palette of your graph is to add viridis color
 You can then compare the means for different sampling groups
 using the variation among samples for each group to determine whether they are different.
 To show you how we can visualize means and variation, we will calculate these values for each group (sex) in our data.</p>
-<p>To do this, we will use the <code>group_by</code> and <code>summarize</code> functions to create a new variable where each subset of data is labeled. First, tell <code>group_by</code> the name of the data you want to divide into subsets, followed by the columns you want to include.</p>
+<p>To do this, we will use the <code>group_by</code> and <code>summarize</code> functions to create a new variable where each subset of data is labeled. First, tell <code>group_by</code> the name of the data you want to divide into subsets, followed by the columns you want to include. R will make groups based on the different categories in these columns.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="evidence-for-evolution.html#cb46-1" tabindex="-1"></a>grouped_test_data <span class="ot">&lt;-</span> <span class="fu">group_by</span>(test_data, sex)</span></code></pre></div>
 <p>Next we calculate the mean, standard deviation (sd), and standard error (se) for each group, and put these into new variables.
 The name of the column containing the mean (calculated using the function <code>mean</code>) is “mean”.
@@ -1062,7 +1062,7 @@ even though the amount of variation in your sample (sd) may stay the same.
 The mean plus/minus 2se is the 95% confidence interval for the estimate of the mean.
 That means that we expect the actual estimate of the mean falls within this range.
 When you are comparing means from two samples as we do here, it’s important to compare the two confidence intervals not the means themselves.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="evidence-for-evolution.html#cb47-1" tabindex="-1"></a>summary_test_data <span class="ot">&lt;-</span> <span class="fu">summarise</span>(grouped_test_data, <span class="at">mean=</span><span class="fu">mean</span>(length), <span class="at">sd=</span><span class="fu">sd</span>(length), <span class="at">se =</span> <span class="fu">sd</span>(length)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">n</span>()))</span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="evidence-for-evolution.html#cb47-1" tabindex="-1"></a>summary_test_data <span class="ot">&lt;-</span> dplyr<span class="sc">::</span><span class="fu">summarise</span>(grouped_test_data, <span class="at">mean=</span><span class="fu">mean</span>(length), <span class="at">sd=</span><span class="fu">sd</span>(length), <span class="at">se=</span><span class="fu">sd</span>(length)<span class="sc">/</span><span class="fu">sqrt</span>(<span class="fu">n</span>()))</span></code></pre></div>
 <p>Click on the variable in your Environment to view your new summary table.</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="evidence-for-evolution.html#cb48-1" tabindex="-1"></a>summary_test_data</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 4
@@ -1073,7 +1073,7 @@ When you are comparing means from two samples as we do here, it’s important to
 <p>To visualize the means and confidence intervals (+/- 2SE), we can again use the <code>ggplot()</code> function with sex on the x axis and the mean value of length on the y axis (note that we are now referring to the <code>summary_test_data</code> data frame that we just created). As before, we are using <code>geom_point()</code> to draw our data as points. In addition, we are using <code>geom_errorbar()</code> to draw the standard deviations around the mean in both directions. You already know all the other code elements from above.</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="evidence-for-evolution.html#cb50-1" tabindex="-1"></a><span class="fu">ggplot</span>(summary_test_data, <span class="fu">aes</span>(<span class="at">x=</span>sex, <span class="at">y=</span>mean)) <span class="sc">+</span></span>
 <span id="cb50-2"><a href="evidence-for-evolution.html#cb50-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb50-3"><a href="evidence-for-evolution.html#cb50-3" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="sc">-</span>sd, <span class="at">ymax=</span>mean<span class="sc">+</span>se), <span class="at">width=</span><span class="fl">0.1</span>)  <span class="sc">+</span>  <span class="co">#width designates the width of the horizontal bars</span></span>
+<span id="cb50-3"><a href="evidence-for-evolution.html#cb50-3" tabindex="-1"></a>  <span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">ymin=</span>mean<span class="dv">-2</span><span class="sc">*</span>se, <span class="at">ymax=</span>mean<span class="sc">+</span><span class="dv">2</span><span class="sc">*</span>se), <span class="at">width=</span><span class="fl">0.1</span>)  <span class="sc">+</span>  <span class="co">#width designates the width of the horizontal bars</span></span>
 <span id="cb50-4"><a href="evidence-for-evolution.html#cb50-4" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Sex&quot;</span>) <span class="sc">+</span></span>
 <span id="cb50-5"><a href="evidence-for-evolution.html#cb50-5" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Mean length [mm]&quot;</span>)</span></code></pre></div>
 <p><img src="Primer-to-Evolution_files/figure-html/meanplot-1.png" width="672" /></p>

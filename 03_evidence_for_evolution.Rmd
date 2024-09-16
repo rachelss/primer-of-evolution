@@ -431,7 +431,7 @@ You can then compare the means for different sampling groups
 using the variation among samples for each group to determine whether they are different. 
 To show you how we can visualize means and variation, we will calculate these values for each group (sex) in our data.
 
-To do this, we will use the `group_by` and `summarize` functions to create a new variable where each subset of data is labeled. First, tell `group_by` the name of the data you want to divide into subsets, followed by the columns you want to include.
+To do this, we will use the `group_by` and `summarize` functions to create a new variable where each subset of data is labeled. First, tell `group_by` the name of the data you want to divide into subsets, followed by the columns you want to include. R will make groups based on the different categories in these columns.
 
 
 ```{r gb}
@@ -455,8 +455,7 @@ When you are comparing means from two samples as we do here, it's important to c
 
 
 ```{r sm}
-summary_test_data <- summarise(grouped_test_data, mean=mean(length), sd=sd(length), se = sd(length)/sqrt(n()))
-
+summary_test_data <- dplyr::summarise(grouped_test_data, mean=mean(length), sd=sd(length), se=sd(length)/sqrt(n()))
 ```
 
 Click on the variable in your Environment to view your new summary table.
@@ -470,7 +469,7 @@ To visualize the means and confidence intervals (+/- 2SE), we can again use the 
 ```{r meanplot}
 ggplot(summary_test_data, aes(x=sex, y=mean)) +
   geom_point() +
-  geom_errorbar(aes(ymin=mean-sd, ymax=mean+se), width=0.1)  +  #width designates the width of the horizontal bars
+  geom_errorbar(aes(ymin=mean-2*se, ymax=mean+2*se), width=0.1)  +  #width designates the width of the horizontal bars
   xlab("Sex") +
   ylab("Mean length [mm]")
 ```
