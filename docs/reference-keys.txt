@@ -355,8 +355,7 @@ migration-the-homogenizing-force
 interactions-between-migration-and-selection
 non-random-mating-not-much-of-a-force
 interactions-between-inbreeding-and-selection
-case-study-background-beyond-selection
-modeling-mutation-drift-and-selection
+case-study-modeling-mutation-drift-and-selection
 modeling-mutation-and-selection
 modeling-genetic-drift
 modeling-genetic-drift-and-selection

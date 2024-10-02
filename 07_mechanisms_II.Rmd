@@ -478,17 +478,15 @@ grid.arrange(ib2, blankPlot, ib1, ib3,
 
 : Table 6.1: Examples for coefficients of inbreeding for different matings.
 
-## Case Study Background: Beyond Selection
+## Case Study: Modeling Mutation, Drift, and Selection
 
-This chapter will teach you how to model evolutionary forces beyond selection, with particular emphasis on mutation and genetic drift. You will use simulations to work through a number of scenarios that look at the effects of evolutionary forces, both in isolation and in conjunction with selection:
+This section will teach you how to model evolutionary forces beyond selection, with particular emphasis on mutation and genetic drift. You will use simulations to work through a number of scenarios that look at the effects of evolutionary forces, both in isolation and in conjunction with selection:
 
 1.  We will explore how variation in mutation rates and the strength of selection impact equilibrium allele frequencies at the mutation-selection balance.
 
 2.  We will explore the effects of genetic drift across differently sized populations.
 
 3.  We will explore how selection and genetic drift interact in small populations when beneficial or deleterious mutations arise.
-
-## Modeling Mutation, Drift, and Selection
 
 All models you will run for this chapter's exercise are implemented in the R package `learnPopGen`. 
 Load the package using the `library()` function.
