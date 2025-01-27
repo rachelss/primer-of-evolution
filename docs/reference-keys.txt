@@ -2,7 +2,6 @@ fig:campanula
 fig:lamarck
 fig:beaglemap
 fig:finches
-fig:df1
 fig:stickleback
 fig:speccont
 fig:ringspecies
@@ -258,10 +257,6 @@ predictions
 the-process-natural-selection-is-a-mechanism-of-evolution
 distinguishing-between-pattern-and-process
 population-thinking
-practical-skills-getting-started-with-r
-what-are-r-and-rstudio
-accessing-rstudio
-some-r-and-rstudio-basics
 additional-resources
 alternative-evolution-textbooks
 evolution-in-the-primary-literature-and-the-news
@@ -285,6 +280,9 @@ tiktaalik
 absence-of-evidence
 case-study-darwins-finches
 plotting-as-the-basis-for-understanding-relationships-in-data
+what-are-r-and-rstudio
+accessing-rstudio
+some-r-and-rstudio-basics
 import-data
 graphing-data
 case-study-darwins-finches-1
